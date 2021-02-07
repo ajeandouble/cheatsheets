@@ -1,10 +1,20 @@
 # Dev fullstack cheat-sheet
 
+## Resources for fullstack development
+
+**Track what stack and Saas solutions tech companies use:**
+[Stackshare](https://stackshare.io/)
+
+## Git
+
+### Emulating git flow
+
+[Without Git Flow](https://skoch.github.io/Git-Workflow/without-gitflow.html)
+
 ## Javascript
 
-### ES6
-
 [Javascript The Core](http://dmitrysoshnikov.com/ecmascript/javascript-the-core/)
+
 ### Determining `this` (You don't know JS)
 
 Now, we can summarize the rules for determining `this` from a function call's call-site, in their order of precedence. Ask these questions in this order, and stop when the first rule applies.
@@ -35,9 +45,10 @@ Not suitable for call, apply and bind methods, which generally rely on establish
 Can not be used as constructors.
 Can not use yield, within its body
 
-[Arrowr functions- MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+[Arrow functions- MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
 ### Shallow copy vs deep copy
+
 #### Shallow
 
 ```
@@ -52,9 +63,10 @@ console.log(obj.val.a) // copiedObj.val and obj.val are pointing to the same obj
 #### Deep copy
 ```JSON.parse(JSON.stringify(obj))```
 
-### Prototypes
+### Objet oriented programming
 
-Every object has a \_\_proto\_\_ property ([\[Prototype]]). Functions have a default **prototype** property with a default **prototype.constructor** equals to the function object. 
+[OO relationships](https://dmitrysoshnikov.medium.com/oo-relationships-5020163ab162)<br>
+[OOP general theory](http://dmitrysoshnikov.com/ecmascript/chapter-7-1-oop-general-theory/)
 
 ### Methods
 
@@ -116,7 +128,6 @@ const Cobj = new C()
 // equivalent of
 function F() {
 	this.a = 42;
-	
 }
 F.static_method = function static_method() { console.log('static_method') }
 F.prototype.method = function method() { console.log('method') }
@@ -134,7 +145,7 @@ class Point {
 class Point {
   constructor() {
     this.a = 22;
-  }t	
+  }	
 }
 ```
 [Getting class property outside method](https://stackoverflow.com/questions/38269083/declare-a-class-property-outside-of-a-class-method)
@@ -144,10 +155,10 @@ class Point {
 
 There are no such thing as methods. There are properties which happen to be functions.
 
-#### Prototype
+### Prototype
 
 Every object as an internal property **[[prototype]]**. **\__proto\__** is a non-standard accessor (`object.__proto__ = value` has no effect).
-<br>If you want to modify the **[[prototype]]** property you have to use the `Object.setPrototypeOf(object, prototype)` method. You can create an object with a **SOMETHING** **[[prototype]]** property with Object.create or **new** or you can override [[proto]] by doing const instane = { __proto__:  
+<br>If you want to modify the **[[prototype]]** property you have to use the `Object.setPrototypeOf(object, prototype)` method. You can create an object with a **\_\_proto\_\_** property defined with **Object.create()** or **new** or you can override [[proto]] by doing const instance = { \_\_proto\_\_: something }
 
 
 ```
@@ -164,7 +175,8 @@ C.__proto__ === Object.__proto__ // true
 
 ```
 
-#### Inheritance
+#### Prototype inheritance
+
 ```ECMAScript 2015 introduced a new set of keywords implementing classes. The new keywords include class, constructor, static, extends, and super.```<br>
 [Inheritance and the prototype chain - With the class keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain#with_the_class_keyword)
 ```
@@ -187,7 +199,7 @@ B.prototype.__proto__ === A.prototype // true
 new B().__proto__ === A.prototype // true
 ```
 
-*is equivalent to:*
+**is equivalent to:**
 ```
 function A() { this.something = 42; }
 A.prototype.a = function a() { console.log('A') }
@@ -204,13 +216,12 @@ obj.a(); // 'A'
 obj.b(); // 'B'
 obj.print_value();
 ```
-You could technically extends the function
 
-See [Inheritance and the prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
-A.__proto__
-```
-```
-***instanceof** checks wether an object is an instance of another through looking up the prototype chain.
+See [Inheritance and the prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain#summary_of_methods_for_extending_the_prototype_chain
+
+>The instanceof operator tests to see if the prototype property of a constructor appears anywhere in the prototype chain of an object. The return value is a boolean value. 
+
+[instanceof - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof)
 
 ```
 function Manager() {
@@ -230,21 +241,71 @@ WorkerBee.prototype.constructor = WorkerBee;
 
 ### Setters and  getters
 
-### Call, Apply and Bind
-
-#### 
 #### Difference between Call and Apply
 
 ```Note: While the syntax of this function is almost identical to that of call(), the fundamental difference is that call() accepts an argument list, while apply() accepts a single array of arguments.```
+
+### Object.assign()
+
+>The Object.assign() method copies all enumerable own properties from one or more source objects to a target object. It returns the target object.
+```
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+Object.assign(target, source);
+console.log(target); // expected output: Object { a: 1, b: 4, c: 5 }
+```
+[Object.assign() - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+
+### Mixins
+
+>Mixin – is a generic object-oriented programming term: a class that contains methods for other classes.<br>
+Some other languages allow multiple inheritance. JavaScript does not support multiple inheritance, but mixins can be implemented by copying methods into prototype.
+
+[Javascript.info - mixins](https://javascript.info/mixins)
 
 ### Promises
 
 #### Thenables
 
+>In JavaScript, a thenable is an object that has a then() function. All promises are thenables, but not all thenables are promises.
+Many promise patterns, like chaining and async/await, work with any thenable. For example, you can use thenables in a promise chain:
+
+```
+const thenable = {
+  then: function(onFulfilled) {
+    setTimeout(() => onFulfilled(42), 10);
+  }
+};
+
+Promise.resolve().
+  then(() => thenable).
+  then(v => {
+    v; // 42
+  });
+```
+
+[Thenables - MasteringJS](https://masteringjs.io/tutorials/fundamentals/thenable)
 ### Enumerables
 
-### 
+### Map, Set, Array
 
+#### Map
+
+>The Map object holds key-value pairs and remembers the original insertion order of the keys. Any value (both objects and primitive values) may be used as either a key or a value.
+
+[Global objects - Map - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+
+```
+new Map() – creates the map.
+map.set(key, value) – stores the value by the key.
+map.get(key) – returns the value by the key, undefined if key doesn’t exist in map.
+map.has(key) – returns true if the key exists, false otherwise.
+map.delete(key) – removes the value by the key.
+map.clear() – removes everything from the map.
+map.size – returns the current element count.
+```
+
+#### Set
 
 ### AJAX
 
@@ -295,7 +356,31 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop
 >Middleware functions are functions that have access to the request object ( req ), the response object ( res ), and the next function in the application's request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
 Middleware is a function put in the midle who does work on teh request and pass 
 
-## HTTP
+### PassportJS
+
+```
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});              │
+                 │ 
+                 │
+                 └─────────────────┬──→ saved to session
+                                   │    req.session.passport.user = {id: '..'}
+                                   │
+                                   ↓           
+passport.deserializeUser(function(id, done) {
+                   ┌───────────────┘
+                   │
+                   ↓ 
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });            └──────────────→ user object attaches to the request as req.user   
+});
+```
+[Understanding passportJS Serialize/Deserialize - Stack Overflow](https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize)
+
+## Browser
+
 ### CORS
 
 >The server is responsible for reporting the allowed origins. The web browser is responsible for enforcing that requests are only sent from allowed domains.
@@ -318,7 +403,7 @@ Remember: CORS is not security. Do not rely on CORS to secure your site. If you 
 
 [Javascript cookie with no expiration date](https://stackoverflow.com/questions/532635/javascript-cookie-with-no-expiration-date/532660#532660)
 
-### Databases
+## Databases
 
 ### MongoDB
 
@@ -329,6 +414,9 @@ Mongoose is built on top of the MongoDB driver to provide programmers with a way
 
 ## ReactJS
 
+### Resources
+
+[ReactJS - Blog](https://blog.logrocket.com/author/gladchinda/)
 ### Create-react-app
 
 **create-react-app** add the following features without need to for further configuration to a a nodeJS project:
@@ -349,11 +437,80 @@ Hassle-free updates for the above tools with a single dependency.
 ### React Fiber
 
 [React Fiber](https://www.youtube.com/watch?v=GHPkhjOvBe0)
+
+### Class components
+
+#### 
 ### Hooks
 
-[Hooks under the Hood](https://medium.com/the-guild/under-the-hood-of-reacts-hooks-system-eb59638c9dba)
+[Hooks under the Hood](http                                                                   s://medium.com/the-guild/under-the-hood-of-reacts-hooks-system-eb59638c9dba)
 
 [Usestate implementation](https://www.newline.co/@CarlMungazi/a-journey-through-the-usestate-hook--a4983397)
+
+You can pass a function to the state setting function by useState instead of a value. So the value is not bound to whatever current value.
+
+[How does React Hooks re-renders a functional component](https://medium.com/swlh/how-does-react-hooks-re-renders-a-function-component-cc9b531ae7f0#:~:text=already%20aware%20of%20%3A-,The%20render%20function%20accepts%20a%20Component%20and%20renders%20it.,the%20component%20automatically%20when%20invoked.)
+
+#### Pseudo-implementation of useState()
+
+```
+let state = [];
+let setters = [];
+let firstRun = true;
+let cursor = 0;
+
+function createSetter(cursor) {
+  return function setterWithCursor(newVal) {
+    state[cursor] = newVal;
+  };
+}
+
+// This is the pseudocode for the useState helper
+export function useState(initVal) {
+  if (firstRun) {
+    state.push(initVal);
+    setters.push(createSetter(cursor));
+    firstRun = false;
+  }
+
+  const setter = setters[cursor];
+  const value = state[cursor];
+
+  cursor++;
+  return [value, setter];
+}
+
+// Our component code that uses hooks
+function RenderFunctionComponent() {
+  const [firstName, setFirstName] = useState("Rudi"); // cursor: 0
+  const [lastName, setLastName] = useState("Yardley"); // cursor: 1
+
+  return (
+    <div>
+      <Button onClick={() => setFirstName("Richard")}>Richard</Button>
+      <Button onClick={() => setFirstName("Fred")}>Fred</Button>
+    </div>
+  );
+}
+
+// This is sort of simulating Reacts rendering cycle
+function MyComponent() {
+  cursor = 0; // resetting the cursor
+  return <RenderFunctionComponent />; // render
+}
+
+console.log(state); // Pre-render: []
+MyComponent();
+console.log(state); // First-render: ['Rudi', 'Yardley']
+MyComponent();
+console.log(state); // Subsequent-render: ['Rudi', 'Yardley']
+
+// click the 'Fred' button
+
+console.log(state); // After-click: ['Fred', 'Yardley']
+```
+
+[react hooks not magic just array](https://medium.com/@ryardley/react-hooks-not-magic-just-arrays-cd4f1857236e)
 
 ### Babel and Webpack
 
@@ -365,6 +522,49 @@ For compatibility with older browsers, build tools like Webpack and Rollup and/o
 
 
 [Usestate implementation](https://www.newline.co/@CarlMungazi/a-journey-through-the-usestate-hook--a4983397)
+
+## Websockets
+
+[Websockets and other Web APIs for real time requests](https://medium.com/platform-engineer/web-api-design-35df8167460)
+
+**Websockets RFC**
+[Websockets RFC](https://tools.ietf.org/html/rfc6455)
+
+[Websockets for fun and profit](https://stackoverflow.blog/2019/12/18/websockets-for-fun-and-profit/)
+
+
+### A simple websockets implementation
+
+#### Server side
+```
+const WebSocket = require('ws');
+const ws = new WebSocket.Server({ port: 8080 });
+
+ws.on('connection', function connection(wsConnection) {
+  wsConnection.on('message', function incoming(message) {
+    console.log(`server received: ${message}`);
+  });
+
+  wsConnection.send('got your message!');
+});
+
+```
+
+#### Client side
+```
+const socket = new WebSocket('ws://localhost:8080'); 
+socket.addEventListener('open', function (event) { 
+  socket.send('Hello Server!'); 
+}); 
+
+socket.addEventListener('message', function (event) { 
+  console.log('Message from server ', event.data); 
+});
+
+socket.addEventListener('close', function (event) { 
+  console.log('The connection has been closed'); 
+});
+```
 
 ## Databases
 
