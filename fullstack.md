@@ -13,7 +13,22 @@
 
 ## Javascript
 
+[Javascript Tutorial](https://javascript.info/)
+
+[You don't know JS](https://github.com/getify/You-Dont-Know-JS)
+
+[Secrets of the Javascript Ninja](https://github.com/sakataa/Paper/blob/master/JS/Secrets%20of%20the%20JavaScript%20Ninja%2C%202nd%20Edition.pdf)
+
 [Javascript The Core](http://dmitrysoshnikov.com/ecmascript/javascript-the-core/)
+
+### Rest parameter
+
+```
+function f(a, b, ...rest) { console.log(a, b, rest) }
+f(1, 2) // 1 2 []
+f(1, 2, 3) // 1 2 [3]
+f(1, 2, 3, '42') // 1 2 [3, '42]
+```
 
 ### Determining `this` (You don't know JS)
 
@@ -177,7 +192,8 @@ C.__proto__ === Object.__proto__ // true
 
 #### Prototype inheritance
 
-```ECMAScript 2015 introduced a new set of keywords implementing classes. The new keywords include class, constructor, static, extends, and super.```<br>
+>ECMAScript 2015 introduced a new set of keywords implementing classes. The new keywords include class, constructor, static, extends, and super.```
+
 [Inheritance and the prototype chain - With the class keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain#with_the_class_keyword)
 ```
 class A {
@@ -241,7 +257,26 @@ WorkerBee.prototype.constructor = WorkerBee;
 
 ### Setters and  getters
 
-#### Difference between Call and Apply
+```
+const obj = {
+	v: undefined,
+	set setV(value) { this.v = value },
+	get getV() { return this.v }
+}
+obj // { v: undefined, setV: [Setter], getV: [Getter] }
+obj.setV = 42
+obj.getV // 42
+obj // { v: 42, setV: [Setter], getV: [Getter] }
+```
+
+#### Defining a getter or setter on existing object
+
+```
+Object.defineProperty(obj, 'setV', { set: function(x) { this.v = x / 2; }});
+Object.defineProperty(obj, 'getV', { get: function() { return this.v + 1; } });
+``` 
+
+### Difference between Call and Apply
 
 ```Note: While the syntax of this function is almost identical to that of call(), the fundamental difference is that call() accepts an argument list, while apply() accepts a single array of arguments.```
 
@@ -256,6 +291,10 @@ console.log(target); // expected output: Object { a: 1, b: 4, c: 5 }
 ```
 [Object.assign() - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
 
+### Object.freeze()
+
+[Why would I need to freeze an object in Javascript](https://stackoverflow.com/questions/14791302/why-would-i-need-to-freeze-an-object-in-javascript)
+
 ### Mixins
 
 >Mixin – is a generic object-oriented programming term: a class that contains methods for other classes.<br>
@@ -264,6 +303,10 @@ Some other languages allow multiple inheritance. JavaScript does not support mul
 [Javascript.info - mixins](https://javascript.info/mixins)
 
 ### Promises
+
+```Promise.resolve(obj) === obj // Testing if obj is a promise according to Ecma specs```
+
+[How do I tell if an object is a promise?](https://stackoverflow.com/questions/27746304/how-do-i-tell-if-an-object-is-a-promise)
 
 #### Thenables
 
@@ -285,6 +328,7 @@ Promise.resolve().
 ```
 
 [Thenables - MasteringJS](https://masteringjs.io/tutorials/fundamentals/thenable)
+
 ### Enumerables
 
 ### Map, Set, Array
@@ -307,11 +351,38 @@ map.size – returns the current element count.
 
 #### Set
 
+>The Set object lets you store **unique** values of any type, whether primitive values or object references.
+
+```
+const s = new Set([1, 2, 3]);
+s // Set(3) { 1, 2, 3 }
+s.add(4) // Set(4) { 1, 2, 3, 4 }
+s.add(1) // Set(4) { 1, 2, 3, 4 }
+s.has(1) // true
+s.delete(4) // true
+s // Set(3) { 1, 2, 3 }
+s.delete(4) // false
+```
+
+[Using the Set Object - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#using_the_set_object)
+
+
+
+### Generators
+
+// ...
+
+### Symbols
+
+// ...
+
 ### AJAX
 
 >Asynchronous JavaScript and XML, while not a technology in itself, is a term coined in 2005 by Jesse James Garrett, that describes a "new" approach to using a number of existing technologies together, including HTML or XHTML, CSS, JavaScript, DOM, XML, XSLT, and most importantly the XMLHttpRequest object.
 
 [Using XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
+
+
 
 ## Nodejs
 
@@ -414,9 +485,12 @@ Mongoose is built on top of the MongoDB driver to provide programmers with a way
 
 ## ReactJS
 
-### Resources
+[React Under The Hood](https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS/blob/master/fiber/book/Intro.md)
 
 [ReactJS - Blog](https://blog.logrocket.com/author/gladchinda/)
+
+[Read React source code](https://github.com/numbbbbb/read-react-source-code/blob/master/02-how-render-works.md)
+
 ### Create-react-app
 
 **create-react-app** add the following features without need to for further configuration to a a nodeJS project:
@@ -430,17 +504,78 @@ A build script to bundle JS, CSS, and images for production, with hashes and sou
 An offline-first service worker and a web app manifest, meeting all the Progressive Web App criteria.<br>
 Hassle-free updates for the above tools with a single dependency.
 
-### React under the hood
+### JSX in plain Javascript
 
-[React Under The Hood](https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS/blob/master/fiber/book/Intro.md)
+#### How an element is created
+
+```
+createElement()
+React.createElement(
+  type,
+  [props],
+  [...children]
+)
+```
+
+#### Examples of Js to JSX conversion by Babel
+
+**Nested components**
+```
+<>
+<MyButton color="blue" >
+  Click Me
+</MyButton>
+  <p>Test<b>bold</b></p>
+</>
+```
+*becomes:*
+```
+"use strict";
+
+/*#__PURE__*/
+React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(MyButton, {
+  color: "blue"
+}, "Click Me"), /*#__PURE__*/React.createElement("p", null, "Test", /*#__PURE__*/React.createElement("b", null, "bold")));
+```
+[Babel online compiler](https://babeljs.io/)
+
+**Handlers**
+```
+var mouseOverHandler = function mouseOverHandler() {
+    console.log('you moused over');
+  };
+var clickhandler = function clickhandler() {
+    console.log('you clicked');
+  };
+var reactNode = React.createElement(
+    'div',
+    { onClick: clickhandler, onMouseOver: mouseOverHandler },
+    'click or mouse over'
+  );
+
+ReactDOM.render(reactNode, document.getElementById('app'));
+```
+[JSX - Understanding in the context of ReactJS](https://rohan-paul.github.io/javascript/2017/08/13/JSX_Understanding_In_The_Context_Of_Reactjs/#:~:text=So%2C%20if%20JavaScript%20files%20contains,representation%20of%20a%20DOM%20node.)
+
 
 ### React Fiber
 
 [React Fiber](https://www.youtube.com/watch?v=GHPkhjOvBe0)
 
+### Context
+
+[Context](https://reactjs.org/docs/context.html)
+
 ### Class components
 
-#### 
+#### // ...
+
+// ...
+
+### React Lifecycle
+
+// ...
+
 ### Hooks
 
 [Hooks under the Hood](http                                                                   s://medium.com/the-guild/under-the-hood-of-reacts-hooks-system-eb59638c9dba)
@@ -450,6 +585,31 @@ Hassle-free updates for the above tools with a single dependency.
 You can pass a function to the state setting function by useState instead of a value. So the value is not bound to whatever current value.
 
 [How does React Hooks re-renders a functional component](https://medium.com/swlh/how-does-react-hooks-re-renders-a-function-component-cc9b531ae7f0#:~:text=already%20aware%20of%20%3A-,The%20render%20function%20accepts%20a%20Component%20and%20renders%20it.,the%20component%20automatically%20when%20invoked.)
+
+
+#### How setters trigger re-render
+
+**Setters** and **useEfect** use **Object.is** algorithm to check for updated value.
+
+```
+function Component() {
+	const [clicked, setClicked] = useState({value: false});
+	return (
+		<><button onClick={() => { clicked.value = true; value.setClicked(clicked); }}>Click me!</button></>
+	)
+} // Clicking on the button won't trigger a re-render due to Object comparaison being true
+
+// onClick={ () => { const newClicked = Object.assign({}, clicked); newClicked.value = true; setClicked(newClicked); } }
+// => will trigger a re-render
+//  onClick={ () => setClicked(prev => whatever_new_state) }
+// => will trigger a re-render
+```
+
+>A function which is being used to compare objects is practically a polyfill of Object.is method.
+
+[What comparaison process does the react useEffect hook use](https://stackoverflow.com/questions/55089560/what-comparison-process-does-the-useeffect-react-hook-use)
+
+[The React UseRef Hook explained with examples](https://medium.com/javascript-in-plain-english/the-react-useref-hook-explained-with-examples-3bc759c0b105)
 
 #### Pseudo-implementation of useState()
 
@@ -512,6 +672,86 @@ console.log(state); // After-click: ['Fred', 'Yardley']
 
 [react hooks not magic just array](https://medium.com/@ryardley/react-hooks-not-magic-just-arrays-cd4f1857236e)
 
+
+#### UseRef
+
+>The hook useRef is one of the important and useful React hooks that you need to know. It allows you to access DOM elements directly, and persist data between renders without causing a component to re-render infinitely when changes.
+
+```
+const Reference = ()=> {
+  const [name, setName] = useState('Mehdi')
+  const previousName = useRef(null)
+
+  useEffect(() => {
+    previousName.current = name;
+  }, [name])
+
+  return (
+    <>
+      <input value={name} onChange={e => setName(e.target.value)} />
+      <div>{previousName.current} => {name}</div>
+    </>
+  )
+}
+```
+
+### Context
+
+// ...
+
+### React-router-dom
+
+[Understanding the fundamentals of React Router](https://medium.com/the-andela-way/understanding-the-fundamentals-of-routing-in-react-b29f806b157e)
+
+#### Private route
+
+```
+export const PrivateRoute = ({component: Component, ...rest}) => {
+	return (
+ 		<Route {...rest} render={props => (
+		    isLoading() ?
+		    <Loading /> :
+		        isAuth ?
+		            <Component {...props} />
+		        : <Redirect to="/" />
+       	 	     )} />
+		);
+}
+```
+
+### Lazy loading
+
+```
+const SomeComponent = React.lazy(() => import('./SomeComponent'));
+```
+
+>React.lazy() lets you define a component that is loaded dynamically. This helps reduce the bundle size to delay loading components that aren’t used during the initial render.
+
+```
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+function MyComponent() {
+  return (
+    // Displays <Spinner> until OtherComponent loads
+    <React.Suspense fallback={<Spinner />}>
+      <div>
+        <OtherComponent />
+      </div>
+    </React.Suspense>
+  );
+}
+```
+>Rendering lazy components requires that there’s a <React.Suspense> component higher in the rendering tree. This is how you specify a loading indicator.
+
+[Lazy - React docs](https://reactjs.org/docs/react-api.html#reactlazy)
+
+
+### Composition in React
+
+>
+[Using composition to avoid 'props drilling' - Youtube](https://www.youtube.com/watch?v=3XaXKiXtNjw)
+
+[Composition vs Inheritance - React docs](https://reactjs.org/docs/composition-vs-inheritance.html)
+
 ### Babel and Webpack
 
 >The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed.
@@ -565,6 +805,36 @@ socket.addEventListener('close', function (event) {
   console.log('The connection has been closed'); 
 });
 ```
+## Regex
+
+[Training puzzles](https://www.hackerrank.com/domains/regex)
+
+### Basic Regex
+```
+var regex = /hello/
+regex.test('a') // false
+regex.test('helloW') // true
+regex = new RegExp('hello', 'i') // equivalent with case-insensitive test
+regex.test('Hello') // true
+regex = /[bt]ear/
+regex.test('tear') // true
+regex.test('bear') // true
+regex.test('dear') // false
+var regex = /[^bt]ear/; // negated character set
+console.log(regex.test('bear')); // false
+console.log(regex.test('fear')); // true
+regex = /[A-Z]/ // range
+regex = /\d/ // digit, equivalent to [0-9]
+regex = /\w/ // equivalent to [a-zA-Z0-9_]
+regex = /\d+/ // matches preceding expression one or more time
+regex = /Aa*/ // matches the preceding expression 0 or more times.
+regex = /goo?d/ // matches the preceding expression 0 or 1 time
+regex = /^good/ // beginning of the string
+regex = /end\.$/ // end of the string with 'end.'. Escaping the '.' with '\.'
+// return true
+
+regex.match('
+```
 
 ## Databases
 
@@ -572,6 +842,12 @@ Relational: use
 
 ORM Object Relational Model
 ODM Object Data Model
+
+## CSS
+
+### Ressources
+
+[CSS Battles](https://cssbattle.dev/)
 
 
 
