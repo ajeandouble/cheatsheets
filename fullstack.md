@@ -392,7 +392,7 @@ NodeJS use asynchronous I/O API (libuv) to make non-blocking I/O and sockets cal
 
 ### Require()
 
-Require loads the code of the module and wrap it in a function then executes the code using v8 vm.runInThisContext.
+Require loads the code of the module and wrap it in a function then executes the code using v8 *vm.runInThisContext*.
 
 >Module.wrap = function(script) {
   return Module.wrapper[0] + script + Module.wrapper[1];
@@ -458,7 +458,7 @@ passport.deserializeUser(function(id, done) {
 
 [Stackoverflow: Cors, is it a client-side thing, a server-sde thing or a transport-level thing?](https://stackoverflow.com/questions/36958999/cors-is-it-a-client-side-thing-a-server-side-thing-or-a-transport-level-thin)
 
-CORS is not security. The browser is responsive for setting the Origin Header. It avoids attacks such as click jacking.
+CORS is not security. The browser is responsible for setting the Origin Header. It avoids attacks such as click jacking.
 
 >Browsers are in control of setting the Origin header, and users can't override this value. So you won't see the Origin header spoofed from a browser. A malicious user could craft a curl request that manually sets the Origin header, but this request would come from outside a browser, and may not have browser-specific info (such as cookies).
 Remember: CORS is not security. Do not rely on CORS to secure your site. If you are serving protected data, use cookies or OAuth tokens or something other than the Origin header to secure that data. The Access-Control-Allow-Origin header in CORS only dictates which origins should be allowed to make cross-origin requests. Don't rely on it for anything more.
@@ -697,7 +697,22 @@ const Reference = ()=> {
 
 ### Context
 
-// ...
+
+>Unpopular opinion: All that junk you're putting in React context should just be props. Legit uses for context are rare, and mostly for library code, not your app.
+
+[Mjackson - Twitter](https://twitter.com/mjackson/status/1195431511417208834)
+
+```
+const things = useContext(ThingsContext)
+```
+
+[Using React Context with functional components](https://medium.com/@danfyfe/using-react-context-with-functional-components-153cbd9ba214)
+
+### Prop drilling and composition
+
+We can avoid using **React.Context** by using composition.
+
+[Thinking in React component composition](https://dev.to/bouhm/thinking-in-react-component-composition-fp5)
 
 ### React-router-dom
 
@@ -838,10 +853,10 @@ regex.match('
 
 ## Databases
 
-Relational: use 
+>Object-relational mapping (ORM, O/RM, and O/R mapping tool) in computer science is a programming technique for converting data between incompatible type systems using object-oriented programming languages. This creates, in effect, a "virtual object database" that can be used from within the programming language.
 
-ORM Object Relational Model
-ODM Object Data Model
+>**ORM**: Object Relational Mapping
+>**ODM**: Object Document Mapping
 
 ## CSS
 
@@ -849,6 +864,33 @@ ODM Object Data Model
 
 [CSS Battles](https://cssbattle.dev/)
 
+## Misc
+
+### Encoding
+
+[Base64](https://en.wikipedia.org/wiki/Base64)
+
+#### Example of MIME Type encoded email with Base64
+
+```
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary=frontier
+
+This is a message with multiple parts in MIME format.
+--frontier
+Content-Type: text/plain
+
+This is the body of the message.
+--frontier
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+
+PGh0bWw+CiAgPGhlYWQ+CiAgPC9oZWFkPgogIDxib2R5PgogICAgPHA+VGhpcyBpcyB0aGUg
+Ym9keSBvZiB0aGUgbWVzc2FnZS48L3A+CiAgPC9ib2R5Pgo8L2h0bWw+Cg==
+--frontier--
+```
+
+[Mime type](https://en.wikipedia.org/wiki/MIME)
 
 
 
