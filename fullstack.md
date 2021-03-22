@@ -5,10 +5,22 @@
 **Track what stack and Saas solutions tech companies use:**
 [Stackshare](https://stackshare.io/)
 
-## Git
+## Deployment
 
-### Emulating git flow
+### Heroku
 
+#### Redeploying Heroku with an empty commit
+
+```
+git commit --allow-empty -m "Trigger Heroku deploy after enabling collectstatic"
+git push $REMOTE $BRANCH
+```
+
+### Git
+
+[Git objects - Git Objects](https://book.git-scm.com/book/en/v2/Git-Internals-Git-Objects)
+
+#### Emulating Git Flow
 [Without Git Flow](https://skoch.github.io/Git-Workflow/without-gitflow.html)
 
 ## Javascript
@@ -20,6 +32,8 @@
 [Secrets of the Javascript Ninja](https://github.com/sakataa/Paper/blob/master/JS/Secrets%20of%20the%20JavaScript%20Ninja%2C%202nd%20Edition.pdf)
 
 [Javascript The Core](http://dmitrysoshnikov.com/ecmascript/javascript-the-core/)
+
+[Eloquent Javascript](https://eloquentjavascript.net/)
 
 ### Rest parameter
 
@@ -51,6 +65,8 @@ Now, we can summarize the rules for determining `this` from a function call's ca
     `var bar = foo()`
 
 [You don't know javascript - This & object]()
+
+[Understand JavaScript more deeply by writing a bind function - Medium](https://medium.com/@adambomb/understand-javascript-more-deeply-by-writing-a-bind-function-8b619b242dcc)
 
 ### Arrow functions
 
@@ -163,6 +179,22 @@ class Point {
   }	
 }
 ```
+
+#### This
+
+```
+class Example {
+    constructor() {
+      const proto = Object.getPrototypeOf(this);
+      console.log(Object.getOwnPropertyNames(proto));
+    }
+    first(){}
+    second(){}
+    static third(){}
+}
+
+ new Example(); // ['constructor', 'first', 'second']
+```
 [Getting class property outside method](https://stackoverflow.com/questions/38269083/declare-a-class-property-outside-of-a-class-method)
 
 [Property vs.Method](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/)
@@ -195,6 +227,7 @@ C.__proto__ === Object.__proto__ // true
 >ECMAScript 2015 introduced a new set of keywords implementing classes. The new keywords include class, constructor, static, extends, and super.```
 
 [Inheritance and the prototype chain - With the class keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain#with_the_class_keyword)
+
 ```
 class A {
 	constructor() {	this.something = 42; }
@@ -331,6 +364,8 @@ Promise.resolve().
 
 ### Enumerables
 
+// ...
+
 ### Map, Set, Array
 
 #### Map
@@ -382,7 +417,7 @@ s.delete(4) // false
 
 [Using XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
 
-
+### DOM
 
 ## Nodejs
 
@@ -467,6 +502,7 @@ Remember: CORS is not security. Do not rely on CORS to secure your site. If you 
 
 ### Cookies
 
+[Difference between session storage, local storage and session cookies](https://stackoverflow.com/questions/19867599/what-is-the-difference-between-localstorage-sessionstorage-session-and-cookies)
 
 #### Session cookies are cookies set without an expiration date
 
@@ -474,7 +510,24 @@ Remember: CORS is not security. Do not rely on CORS to secure your site. If you 
 
 [Javascript cookie with no expiration date](https://stackoverflow.com/questions/532635/javascript-cookie-with-no-expiration-date/532660#532660)
 
+#### Third party cookie
+
+[Chrome's Changes Could Break Your App - Chrome's Changes Could Break Your App: Prepare for SameSite Cookie Updates](https://blog.heroku.com/chrome-changes-samesite-cookie)
+
+#### Heroku
+
+>herokuapp.app is listed in Public suffix List which means cookies are blocked from bein set to the domain "herokuapp.com"
+
+[How to set a domain Cookie with Heroku](https://stackoverflow.com/questions/57747704/how-to-set-a-same-domain-cookie-with-heroku-subdomains?rq=1)
+
+https://en.wikipedia.org/wiki/Public_Suffix_List
+
 ## Databases
+
+#### SQL
+
+#### SQL Joins
+
 
 ### MongoDB
 
@@ -490,6 +543,8 @@ Mongoose is built on top of the MongoDB driver to provide programmers with a way
 [ReactJS - Blog](https://blog.logrocket.com/author/gladchinda/)
 
 [Read React source code](https://github.com/numbbbbb/read-react-source-code/blob/master/02-how-render-works.md)
+
+[React - Storybooks](https://storybook.js.org)
 
 ### Create-react-app
 
@@ -568,13 +623,48 @@ ReactDOM.render(reactNode, document.getElementById('app'));
 
 ### Class components
 
-#### // ...
+[How does React tell a Class from a Function - Overracted](https://overreacted.io/how-does-react-tell-a-class-from-a-function/#:~:text=If%20your%20component%20is%20defined,use%20new%20when%20calling%20it.)
 
-// ...
+#### Binding this
+
+>In an event, this refers to the element that received the event.
+
+So you have to bind this like so:
+
+
+```
+constructor(props) {
+	super(props);
+	this.handleClick = this.handleClick.bind(this);
+}
+
+handleClick() {	this.setState(state => ({isToggleOn: !state.isToggleOn })); }
+```
+
+or use arrow function so this get lexically bound:
 
 ### React Lifecycle
 
-// ...
+**Mounting**:
+1. **constructor()**
+2. static getDerivedStateFromProps()
+>This method exists for rare use cases where the state depends on changes in props over time. For example, it might be handy for implementing a <Transition> component that compares its previous and next children to decide which of them to animate in and out.
+3. **render()**
+4. **componentDidMount()**
+>componentDidMount() is invoked immediately after a component is mounted (inserted into the tree). Initialization that requires DOM nodes should go here. If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
+
+**Updating** (changes in props or state):
+1. static getDerivedStateFromProps()
+2. shouldComponentUpdate()
+3. **render()**
+4. getSnapshotBeforeUpdate()
+5. **componentDidUpdate()**
+
+#### Custom event listeners
+
+[Add custom event listener to component - Stack Overflow](https://stackoverflow.com/questions/36180414/reactjs-add-custom-event-listener-to-component)
+
+[Why should I remove event listeners](https://stackoverflow.com/questions/53256662/react-why-should-i-remove-event-listeners#:~:text=The%20event%20listeners%20need%20to,which%20will%20create%20memory%20leaks.)
 
 ### Hooks
 
@@ -775,8 +865,7 @@ For compatibility with older browsers, build tools like Webpack and Rollup and/o
 
 **does react need webpack?**
 
-
-[Usestate implementation](https://www.newline.co/@CarlMungazi/a-journey-through-the-usestate-hook--a4983397)
+[Building a simplified Webpack clone](https://lihautan.com/building-a-simplified-webpack-clone/)
 
 ## Websockets
 
