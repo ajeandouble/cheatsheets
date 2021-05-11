@@ -18,6 +18,7 @@ git push $REMOTE $BRANCH
 
 ### Git
 
+[How does git store files? - Stack Overflow](https://stackoverflow.com/questions/8198105/how-does-git-store-files#:~:text=Git%20doesn't%20think%20of,a%20reference%20to%20that%20snapshot.)
 [Git objects - Git Objects](https://book.git-scm.com/book/en/v2/Git-Internals-Git-Objects)
 
 #### Emulating Git Flow
