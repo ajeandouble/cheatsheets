@@ -537,6 +537,10 @@ Mongoose is built on top of the MongoDB driver to provide programmers with a way
 
 [Difference between mongoDB and mongoose](https://stackoverflow.com/questions/28712248/difference-between-mongodb-and-mongoose#:~:text=In%20terms%20of%20Node.,way%20to%20model%20their%20data.)
 
+### Misc
+
+For loop weirdness - See google devs vids
+
 ## ReactJS
 
 [React Under The Hood](https://github.com/Bogdan-Lyashenko/Under-the-hood-ReactJS/blob/master/fiber/book/Intro.md)
@@ -560,7 +564,9 @@ A build script to bundle JS, CSS, and images for production, with hashes and sou
 An offline-first service worker and a web app manifest, meeting all the Progressive Web App criteria.<br>
 Hassle-free updates for the above tools with a single dependency.
 
-### JSX in plain Javascript
+### JSX
+
+[JSX in depth - ReactJS tutorial](https://reactjs.org/docs/jsx-in-depth.html)
 
 #### How an element is created
 
@@ -805,6 +811,10 @@ We can avoid using **React.Context** by using composition.
 
 [Thinking in React component composition](https://dev.to/bouhm/thinking-in-react-component-composition-fp5)
 
+### React-Redux
+
+[Understanding how reducers are used in redux - CSS-Tricks](https://css-tricks.com/understanding-how-reducers-are-used-in-redux/#:~:text=A%20reducer%20is%20a%20function,receives%20to%20determine%20this%20change.&text=Redux%20relies%20heavily%20on%20reducer,reducers%20is%20in%20this%20post.)
+
 ### React-router-dom
 
 [Understanding the fundamentals of React Router](https://medium.com/the-andela-way/understanding-the-fundamentals-of-routing-in-react-b29f806b157e)
@@ -876,7 +886,6 @@ For compatibility with older browsers, build tools like Webpack and Rollup and/o
 [Websockets RFC](https://tools.ietf.org/html/rfc6455)
 
 [Websockets for fun and profit](https://stackoverflow.blog/2019/12/18/websockets-for-fun-and-profit/)
-
 
 ### A simple websockets implementation
 
