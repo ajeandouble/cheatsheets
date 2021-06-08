@@ -5,8 +5,6 @@
 [C-Faq](http://c-faq.com/)
 [How I program C - Eskil Steenberg](https://youtu.be/443UNeGrFoM)
 
-[Harder,Better, Faster, Stronger code](https://hbfs.wordpress.com/)
-
 ### Bookz
 
 [https://freecomputerbooks.com/](https://freecomputerbooks.com/)
@@ -88,15 +86,9 @@ static inline int pow(int n) { return n * n; }
 
 Don't confuse static used in function scope with static used in the global scope. It means the variable can only be accessed from that file.
 
-### Memory
-
-#### Virtual addresses
+### Segments
 
 >In all modern OSes (Windows, Linux, BSD, etc), all addresses in a userspace application are virtual addresses. The exceptions to this are certain RTOSes or other custom bare-metal applications.
-
-
-#### Segments
-
 
 [Do pointers refer to physical or virtual memories](https://stackoverflow.com/questions/55415778/do-pointers-refer-to-physical-or-to-virtual-memories)
 
@@ -124,6 +116,7 @@ int main() {
         // <- code instructions in Text
 ```
 
+
 #### .rodata
 
 Some compilers also use a data segment called .rodata as in read-only data to store string literals and sometimes const.
@@ -145,26 +138,6 @@ exe = '/home/guy/blog/string_elf/a.out'
 
 [From Rodata to RwData - https://guyonbits.com/from-rodata-to-rwdata-introduction-to-memory-mapping-and-ld-scripts/]
 
-#### Symbols
-
-Without adres randomization (ASLR), the variable address is exactly the same as the one found in the symbol table.
-
-```shell
-$ gcc code.c -no-pie -o executable
-$ objdump --syms executable | grep variable
-0804a020 g     O .bss	00000004              variable
-```
-
-```
-printf("%p", &variable); // 0x804a020
-```
-
-#### Executable stack
-
-*-z execstack* marks the object as requiring executable stack.
-
-*-fstack-protector* allocates a little more space on the stack and adds a stack guard (canary) to protect against buffer overflows.
-
 ### Preprocessor
 
 ```
@@ -184,10 +157,7 @@ We need to protect macro with parenthesis otherwise we can get non-desired resul
 
 #### Debug Macro
 
-```
-#define DEBUG(fmt, ...) do { fprintf(stderr, fmt) } while(0) 
 #### Offset Macro
-```
 
 ```
 #define offsetof(st, m) \
@@ -198,23 +168,8 @@ We need to protect macro with parenthesis otherwise we can get non-desired resul
 
 ### Types
 
-```
-printf("%d", sizeof('A')); // 4
-```
-
-#### Integers promotions
-
-#### Type conversions
-
-#### Floats
-
-[What every programmer needs to know about floats - Oracle](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html)
 
 ### Arrays
-
->Plain *array* decays to a pointer to its first element, it's equal to *&array[0]*.
-
-[Why are arrays and array pointing to the same address?](https://stackoverflow.com/questions/54807208/why-are-array-and-array-pointing-to-the-same-address)
 
 ### Array initialization
 
@@ -271,25 +226,6 @@ The memory occupied by a union will be large enough to hold the largest member o
 
 [How Variable arguments list work in C](https://blog.aaronballman.com/2012/06/how-variable-argument-lists-work-in-c/)
 
-### Restrict
-
-```
-void f(int *restrict a, int *restrict b) {
-    *a += *b;
-    *b += *a;
-}
-
-// ...
-int a = 2;
-f(&a, &a); // returns 6
-```
-> gcc -O3 restrict.c -o restrict
-
-[https://cellperformance.beyond3d.com/articles/2006/05/demystifying-the-restrict-keyword.html](Desmitifying the restrict keyword)
-
-### Branchless programming
-
-[Branchless programming examples](https://hbfs.wordpress.com/2008/08/05/branchless-equivalents-of-simple-functions/)
 
 
 ### Threads
@@ -303,4 +239,3 @@ f(&a, &a); // returns 6
 https://stackoverflow.com/questions/2486386/why-do-i-see-throw-in-a-c-library
 assert.h source code from glibc
 
-### GCC
