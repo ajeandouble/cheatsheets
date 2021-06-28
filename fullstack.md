@@ -412,6 +412,12 @@ s.delete(4) // false
 
 // ...
 
+
+### Mutable/Immutable
+
+#### split vs splice, concat etc.
+
+
 ### AJAX
 
 >Asynchronous JavaScript and XML, while not a technology in itself, is a term coined in 2005 by Jesse James Garrett, that describes a "new" approach to using a number of existing technologies together, including HTML or XHTML, CSS, JavaScript, DOM, XML, XSLT, and most importantly the XMLHttpRequest object.
@@ -461,7 +467,15 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop
 ### Express
 
 >Middleware functions are functions that have access to the request object ( req ), the response object ( res ), and the next function in the application's request-response cycle. The next function is a function in the Express router which, when invoked, executes the middleware succeeding the current middleware.
-Middleware is a function put in the midle who does work on teh request and pass 
+Middleware is a function put in the midle who does work on teh request and pass
+
+#### Reading request data
+
+[Differences between req.params, req.query and req.body](https://dev.to/gathoni/express-req-params-req-query-and-req-body-4lpc)
+
+#### Passing data to the next middleware
+
+
 
 ### PassportJS
 
@@ -514,6 +528,10 @@ Remember: CORS is not security. Do not rely on CORS to secure your site. If you 
 #### Third party cookie
 
 [Chrome's Changes Could Break Your App - Chrome's Changes Could Break Your App: Prepare for SameSite Cookie Updates](https://blog.heroku.com/chrome-changes-samesite-cookie)
+
+### Local Storage
+
+[Is it safe to store a JWT inside local storage? - Stack Overflow](https://stackoverflow.com/questions/44133536/is-it-safe-to-store-a-jwt-in-localstorage-with-reactjs)
 
 #### Heroku
 
@@ -991,7 +1009,9 @@ Ym9keSBvZiB0aGUgbWVzc2FnZS48L3A+CiAgPC9ib2R5Pgo8L2h0bWw+Cg==
 
 [Mime type](https://en.wikipedia.org/wiki/MIME)
 
+## TODO
 
 
-
+- Security
+- Oauth1 vs Oauth2
 

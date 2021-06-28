@@ -291,7 +291,6 @@ f(&a, &a); // returns 6
 
 [Branchless programming examples](https://hbfs.wordpress.com/2008/08/05/branchless-equivalents-of-simple-functions/)
 
-
 ### Threads
 
 ### I/O
@@ -304,3 +303,13 @@ https://stackoverflow.com/questions/2486386/why-do-i-see-throw-in-a-c-library
 assert.h source code from glibc
 
 ### GCC
+
+### Misc
+
+#### Coma operator
+
+```
+    if (1, 2, a = b) printf("Wow?");
+```
+
+(The Comma Operator - Wikipedia)[https://en.wikipedia.org/wiki/Comma_operator]
