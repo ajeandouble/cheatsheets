@@ -5,6 +5,9 @@
 **Track what stack and Saas solutions tech companies use:**
 [Stackshare](https://stackshare.io/)
 
+[Javascript testing best practices](https://github.com/goldbergyoni/javascript-testing-best-practices)
+[Stackblitz](https://stackblitz.com/)
+
 ## Deployment
 
 ### Heroku
@@ -1011,7 +1014,8 @@ Ym9keSBvZiB0aGUgbWVzc2FnZS48L3A+CiAgPC9ib2R5Pgo8L2h0bWw+Cg==
 
 ## TODO
 
-
+- Shadow DOM?
+- Ionic
 - Security
 - Oauth1 vs Oauth2
 

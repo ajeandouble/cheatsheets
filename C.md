@@ -6,6 +6,11 @@
 [How I program C - Eskil Steenberg](https://youtu.be/443UNeGrFoM)
 
 [Harder,Better, Faster, Stronger code](https://hbfs.wordpress.com/)
+[Crafting interpreters](https://craftinginterpreters.com/)
+[Linux Container in 500 lines](https://blog.lizzie.io/linux-containers-in-500-loc.html
+)
+[Simple memory alocator](https://arjunsreedharan.org/post/148675821737/write-a-simple-memory-allocator)
+[Learning C projects ideas](https://arjunsreedharan.org/post/148675821737/write-a-simple-memory-allocator)
 
 ### Bookz
 

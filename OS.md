@@ -1,5 +1,10 @@
 # OS/Unix Random shit
 
+## Resources
+
+[The little OS book](http://littleosbook.github.io/#about-the-book)
+[www.30secondsofcode.org](30 seconds of Code)
+
 ## Memory
 
 ### Paging
