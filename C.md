@@ -184,8 +184,12 @@ int main() { int i = FORTYTWO; } // gcc -E fortytwo.c
 We need to protect macro with parenthesis otherwise we can get non-desired results such as :
 
 ```
-#define abs(x) x<0?-x:x // abs(2-3) translates to 2-3<0-2-3:2-3 -> -5
+#define ABS(x) x<0?-x:x // e.g. abs(2-3) translates to 2-3<0-2-3:2-3 -> -5
 ```
+
+It is also better practice macros with* *do {...} while (0)**:
+
+[do {...} while (0) in macros](https://hownot2code.com/2016/12/05/do-while-0-in-macros/)
 
 #### Debug Macro
 
@@ -230,6 +234,16 @@ int array3[5] = {1, };          						// 1, 0, 0, 0, 0
 int array4[5] = { [0 ... 1] = 1, [2 ... 3] = 2 };   				// 1, 1, 2, 2, 0
 int array5[] = { [0 ... 2] = 1, [2 ... 3] = 3, [ 1 ... 4 ] = 5 }; 		// 1, 5, 5, 5, 5
 int array6[] = { [4] = 1, [1 ... 2] = 1, [2 ... 3] = 2, [1] = 8, [1] = 9 }; 	// 0, 9, 2, 1
+```
+
+### Negative array indexes
+
+```
+int	main()
+{
+	int	array[4] = {1, 2, 3, 4};
+	printf("%d", (array + 4)[-4]); // prints '1'
+}
 ```
 
 #### String literals VS Arrays
@@ -310,6 +324,10 @@ assert.h source code from glibc
 ### GCC
 
 ### Misc
+
+#### Pragma
+
+[Anybody who writes #pragma pack(1)...](https://devblogs.microsoft.com/oldnewthing/20200103-00/?p=103290)
 
 #### Coma operator
 
