@@ -1,9 +1,11 @@
-# OS/Unix Random shit
+# OS/Unix, OSDev, binary exploitation and random shit
 
 ## Resources
 
 [The little OS book](http://littleosbook.github.io/#about-the-book)
-[www.30secondsofcode.org](30 seconds of Code)
+[Operating Systems - Andrew Tanenbaum](https://github.com/smellslikekeenspirit/an-askreddit-list-of-compsci-books/blob/master/Modern%20Operating%20Systems%204th%20Edition--Andrew%20Tanenbaum.pdf)
+[Wiki - OSDEV](https://wiki.osdev.org/)
+[How the Kernel manages your memory](https://manybutfinite.com/post/how-the-kernel-manages-your-memory/)
 
 ## Memory
 
@@ -13,20 +15,14 @@
 
 >Paging is achieved through the use of the Memory Management Unit (MMU).
 
-[
 [Virtual Memory: How does Virtual Memory Work](https://www.youtube.com/watch?v=59rEMnKWoS4)
-
-
-### Resources
-
-[Understanding the Linux Virtual Memory Manager]()
 
 ## Permission rings
 ### Permission rings
 
 ### Suid, setuid, setreuid
 
- https://www.osso.nl/blog/setuid-seteuid-uid-euid/
+[SUID, SEUID, EUID](https://www.osso.nl/blog/setuid-seteuid-uid-euid/)
 
 ## Virtualization
 
@@ -35,16 +31,12 @@
 Ring1 can be used to create an emulated real mode (ring0).
 [Linux Architecture - Securing The Stack - Youtube(https://www.youtube.com/watch?v=85eINAowuMc)
 
+## Unix
+
+### LD_PRELOAD
+
+[https://stackoverflow.com/questions/9232892/ld-preload-with-setuid-binary](LD_PRELOAD with setuid - Stack Overflow)
+
 ### Pipes
 
 [Unix Pipe Implementatin](https://toroid.org/unix-pipe-implementation)
-
-## Resources
-
-https://wiki.osdev.org/
-
-### Bookz
-
-[Operating Systems - Andrew Tanenbaum](https://github.com/smellslikekeenspirit/an-askreddit-list-of-compsci-books/blob/master/Modern%20Operating%20Systems%204th%20Edition--Andrew%20Tanenbaum.pdf)
-
-https://manybutfinite.com/post/how-the-kernel-manages-your-memory/
