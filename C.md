@@ -11,6 +11,7 @@
 )
 [Simple memory alocator](https://arjunsreedharan.org/post/148675821737/write-a-simple-memory-allocator)
 [Learning C projects ideas](https://arjunsreedharan.org/post/148675821737/write-a-simple-memory-allocator)
+[Gustedt blog](https://gustedt.wordpress.com/)
 
 ### Bookz
 
@@ -51,7 +52,7 @@ int main() { int i = 2; printf("%d", i); { int i = 4; printf("%d", i) } printf("
 
 | Specifier | Storage       | Initial Value | Scope      | Life         |
 |-----------|---------------|---------------|------------|--------------|
-| auto      | Stack         | Garbage        | In block   | End of block |
+| auto      | Stack         | Garbage       | In block   | End of block |
 | extern    | Data Segment  | Zero          | Global     | Program life |
 | static    | Data segment  | Zero          | In block   | Program life |
 | register  | CPU Register? | Garbage       | In block   | End of block |
@@ -323,6 +324,9 @@ assert.h source code from glibc
 
 ### GCC
 
+#### Fortify source
+[Fortify source 1 and 2 - StackOverflow](https://stackoverflow.com/questions/13517526/difference-between-gcc-d-fortify-source-1-and-d-fortify-source-2)
+
 ### Misc
 
 #### Pragma
@@ -336,3 +340,10 @@ assert.h source code from glibc
 ```
 
 (The Comma Operator - Wikipedia)[https://en.wikipedia.org/wiki/Comma_operator]
+
+## Rand0m
+
+[When to open file in binary mode](https://stackoverflow.com/questions/31483253/when-to-open-file-in-binary-mode-b)
+> Use 'b' mode, to read/write binary data as is without any transformations such as converting newlines to/from platform-specific values or decoding/encoding text using a character encoding.
+
+
