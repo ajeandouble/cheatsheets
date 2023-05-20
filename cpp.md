@@ -6,6 +6,8 @@
 
 [Effective Modern C++](https://github.com/myluco/books-2/blob/master/Effective-Modern-C%2B%2B.pdf)
 [The C++ - Bjarne Stroustrup](https://github.com/boydfd/books/blob/master/seeing/stalled/2013%20Stroustrup%20-%20The%20C%2B%2B%20Programming%20Language%204th%20Edition.pdf)
+[C++ notes for professionals](https://github.com/AzatAI/cs_books/raw/master/CPlusPlusNotesForProfessionals.pdf)
+[CopperSpice - Youtube](https://www.youtube.com/c/CopperSpice/videos)
 
 ## References
 
@@ -99,7 +101,6 @@ There are three access specifiers in C++
 [Virtual Base Classes - microsoft](https://docs.microsoft.com/en-us/cpp/cpp/multiple-base-classes?view=msvc-170)
 
 
-
 ### Operators overloading
 
 >  Watch out that if you try to use `return *this;` on a function whose return type is `Type` and not `Type&`, C++ will try to make a copy of the object and then immediately call the destructor, usually not the intended behaviour. So the return type should be a reference as in your example.
@@ -112,12 +113,32 @@ There are three access specifiers in C++
 
 ***Why we don't use this in operator= (for example. check others)***
 
+## Typedef vs using
+
+[What is the difference between typedef and using in C++11](https://stackoverflow.com/questions/10747810/what-is-the-difference-between-typedef-and-using-in-c11)
+
+## Iterators
+
+## Casting
+
+```
+Use dynamic_cast for converting pointers/references within an inheritance hierarchy.
+Use static_cast for ordinary type conversions.
+Use reinterpret_cast for low-level reinterpreting of bit patterns. Use with extreme caution.
+Use const_cast for casting away const/volatile. Avoid this unless you are stuck using a const-incorrect API.
+```
+[When should static_cast, const_cast, dynamic_cast and reinterpret_cast be used](https://stackoverflow.com/a/332070/12692151)
+
+## Smart pointers
 
 
+### C++ STL
+
+#### std::vector
+
+#### std::map
 
 
-
-## C++ STL
 
 ## Shit yet to explore
 

@@ -18,12 +18,11 @@
 
 [Virtual Memory: How does Virtual Memory Work](https://www.youtube.com/watch?v=59rEMnKWoS4)
 
-## Permission rings
+## Permissions
+
 ### Permission rings
 
-### Suid, setuid, setreuid
 
-[SUID, SEUID, EUID](https://www.osso.nl/blog/setuid-seteuid-uid-euid/)
 
 ## Virtualization
 
@@ -33,6 +32,9 @@ Ring1 can be used to create an emulated real mode (ring0).
 [Linux Architecture - Securing The Stack - Youtube(https://www.youtube.com/watch?v=85eINAowuMc)
 
 ## Unix
+### Suid, setuid, setreuid
+
+[SUID, SEUID, EUID](https://www.osso.nl/blog/setuid-seteuid-uid-euid/)
 
 ### LD_PRELOAD
 
@@ -97,3 +99,13 @@ system: 0x7fe427397480
 
 [GOT and PLT for pwning - System Overlord](https://systemoverlord.com/2017/03/19/got-and-plt-for-pwning.html#:~:text=plt%20contain%20stubs%20to%20jump,sections%20as%20we%20go%20along.)
 
+## Pwn
+
+### Shellcoding
+
+#### Metasploit 
+```
+
+```
+[Carving shellcode using restrictive charset](https://web.archive.org/web/20190218144432/https://vellosec.net/2018/08/carving-shellcode-using-restrictive-character-sets/)
+[Alphanum shellcode](https://blackcloud.me/Linux-shellcode-alphanumeric/)

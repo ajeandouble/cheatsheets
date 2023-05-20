@@ -18,22 +18,6 @@
 [https://freecomputerbooks.com/](https://freecomputerbooks.com/)
 C in depth
 
-## Random things to investigate
-
-https://cellperformance.beyond3d.com/articles/2006/06/understanding-strict-aliasing.html
-
-https://stackoverflow.com/questions/98650/what-is-the-strict-aliasing-rule
-
-[Compression algorithms - Michael Dipperstein's Page O'Stuff](http://michael.dipperstein.com/index.html)
-
-Strict aliasing rule
-https://stackoverflow.com/questions/98650/what-is-the-strict-aliasing-rule
-
-*How to continue execution after a SIGSEGV*
-https://stackoverflow.com/questions/3291382/coming-back-to-life-after-segmentation-violation
-
-Unit testing, Unit testing macros
-
 ## Notes on C
 
 ### Scope
@@ -206,6 +190,14 @@ It is also better practice macros with* *do {...} while (0)**:
 
 [Ofsetof - Wikipedia](https://en.wikipedia.org/wiki/Offsetof)
 
+```C
+#ifdef DEBUG
+# define DBG(x) do { (X) } while(0);
+# else
+# define DBG(X)
+# endif
+```
+
 ### Types
 
 ```
@@ -282,6 +274,29 @@ double data[numElements];
 The memory occupied by a union will be large enough to hold the largest member of the union.
 
 
+#### The infamous *(machine dependent)*union trick
+
+```
+typedef union {
+
+	int i;
+	struct {
+		char b1; // LSB
+		char b2;
+		char b3;
+		char b4; // MSB
+	};
+} u_integer;
+
+int main() {
+	u_integer integer;
+	integer.i = 0xFF;
+	printf("%d\n", integer.i); // 255 == 0xFF
+	integer.b2 = 0xFF;
+	printf("%d\n", integer.i); // 65535 == 0x0000FFFF
+	return (0);
+}
+```
 
 ### Functions
 
@@ -344,6 +359,24 @@ assert.h source code from glibc
 ## Rand0m
 
 [When to open file in binary mode](https://stackoverflow.com/questions/31483253/when-to-open-file-in-binary-mode-b)
+
 > Use 'b' mode, to read/write binary data as is without any transformations such as converting newlines to/from platform-specific values or decoding/encoding text using a character encoding.
 
 
+### Printf buffers
+
+## Random things to investigate
+
+https://cellperformance.beyond3d.com/articles/2006/06/understanding-strict-aliasing.html
+
+https://stackoverflow.com/questions/98650/what-is-the-strict-aliasing-rule
+
+[Compression algorithms - Michael Dipperstein's Page O'Stuff](http://michael.dipperstein.com/index.html)
+
+Strict aliasing rule
+https://stackoverflow.com/questions/98650/what-is-the-strict-aliasing-rule
+
+*How to continue execution after a SIGSEGV*
+https://stackoverflow.com/questions/3291382/coming-back-to-life-after-segmentation-violation
+
+Unit testing, Unit testing macros
