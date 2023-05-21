@@ -21,6 +21,14 @@
 
 ## Language Essentials
 
+### `document` vs `window` vs `global`
+
+- `document`: In web browsers and client-side JavaScript, the `document` object represents the HTML document loaded in the browser. It provides access to the elements, styles, events, and other features of the web page. It allows manipulation and interaction with the **DOM** (Document Object Model) of the web page.
+
+- `window`: In the browser environment, the `window` object represents the global scope in the browser window or tab. It provides access to the document object and various other browser-related functionality such as managing the history and navigation.
+
+- `global`: In the *Node.js* environment or other server-side JavaScript environments, the global object represents the global scope. It provides access to various built-in objects, functions, and modules available in the environment.
+
 ### Automatic Semicolon Insertion (ASI)
 
 ```js
@@ -85,15 +93,116 @@ Primitive types (aka *scalar types*) are always assigned/passed by values while 
 
 [You don't know JS - Kyle Simpson](https://github.com/jumaschion/You-Dont-Know-JS-1/blob/master/types%20%26%20grammar/ch3.md#boxing-wrappers)
 
+
+>In the process of coercion, when the `toString()` method is called on an object, the JavaScript engine needs to determine the appropriate string representation for that object. The object's internal [[Class]] is used for that purpose.
+
 #### Built-in constructors
 
 The `Number()`, `Function()`, `Boolean()`, and similar functions are called constructor functions or built-in constructors in JavaScript.
 
+#### Coercion
 
-### Map, Set, WeakSet, WeakMap
+```js
+2+"2" // 22
+[1,2] + [2, 1]; // '1,22,1'
++[]; // 0
+{} + []; // 0 -> equivalent of +[] ({} is interpreted as empty block-scope
+val = {} + [] // '[object Object]'
 
-// TODO:
+```
+#### Symbols
 
+>Symbol is a built-in object whose constructor returns a symbol primitive that's **guaranteed to be unique**. Symbols are often used to add unique property keys to an object that won't collide with keys any other code might add to the object, and which are hidden from any mechanisms other code will typically use to access the object. That enables a form of weak encapsulation, or a weak form of information hiding.
+
+```js
+Symbol.iterator // iteration protocols
+Symbol.asyncIterator // async iteration protocols
+Symbol.hasInstance // determines if a constructor object recognizes an object as its instance
+// used by instance of
+
+```
+##### (some) `Symbol` methods
+
+>Placing the `Symbol.hasInstance` symbol in the Symbol constructor, rather than directly in the `Object` constructor, is a convention established by the *ECMAScript* specification to indicate that it has broader applicability beyond just objects.
+
+
+### Iteration protocols
+
+>**Protocols** refer to a set of conventions or rules that an object can adhere to in order to enable the iteration behavior. These protocols define the expected behavior and interfaces that an object should implement to be considered iterable.
+
+#### Iterable protocol
+
+>In order to be **iterable**, an object must implement the `@@iterator` method, meaning that the object (or one of the objects up its prototype chain) must have a property with a `@@iterator` key which is available via constant `Symbol.iterator`:
+
+>The iterable protocol allows JavaScript objects to define or customize their iteration behavior, such as what values are looped over in a `for`...`of` construct.
+
+[MDN - Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
+
+#### The iterator protocol
+
+>The iterator protocol defines a standard way to produce a sequence of values (either finite or infinite), and potentially a return value when all values have been generated. An object is an iterator when it implements a next() method with the following semantics
+
+
+```js
+{ done: something, value: somethingElse }
+```
+In practice, an object without either properti returned (by `next()` method) is equivalent to returning `{ done: false, value: undefined }`
+
+```js
+const obj = {};
+obj[Symbol.iterator] = function () {
+	let counter = 0;
+	return {
+		next: () => {
+			if (counter++ < 100) return { value: Math.random(), done: false };
+			else return { value: undefined, done: true };
+		},
+	};
+};
+
+obj.length = 30;
+for (let item of obj) {
+	console.log(item);
+}
+
+for (let i = 0; i < obj.length; ++i) {
+	console.log(obj[i]); // undefined is printed 100x (only arrays are subscritable)
+}
+```
+
+##### The async iterator and async iterable protocols
+
+>There are another pair of protocols used for async iteration, named async iterator and async iterable protocols. They have very similar interfaces compared to the iterable and iterator protocols, except that each return value from the calls to the iterator methods is wrapped in a promise.
+
+[MDN - Iteration Protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols)
+
+#### Generators
+
+>**Generators** simplify the creation of iterable objects and make it easier to work with iteration protocols by providing a more intuitive and compact syntax. Under the hood, generators still adhere to the iteration protocols and generate iterator objects that can be used with the same iteration features as manually implemented iterable objects.
+
+```js
+function *createIterator(items) {
+    for (let i = 0; i < items.length; i++) {
+        yield items[i];
+    }
+}
+
+const iterator = createIterator([0,1]);
+console.log(iterator.next); // { value: 0, done: false }
+console.log(iterator.next); // { value: 1, done: false }
+console.log(iterator.next); // { value: undefined, done: true }
+```
+
+```js
+const iterable = { "0": 1, "1": 2, "2": 3, [Symbol.iterator]: *function() {
+	for (let i = 0; i < 3; ++i)
+		yield this[i];
+for (let item of iterable) { console.log(item) } // { value: 0, done: false } etc.
+```
+
+#### Iterables
+
+>By implementing the iteration protocol, an object becomes iterable and can be easily integrated with JavaScript's built-in iteration mechanisms
 
 
 ### Hoisting
@@ -144,6 +253,71 @@ The **declaration** is **hoisted** but **not the value**.
 A declaration of a variable without `var`, `let`, or `const` is forbidden in strict-mode. In normal mode it is equivalent to a global declaration with `var` (in any scope).
 
 Functions are hoisted first then `var`, in order of declaration in their scope.
+
+
+### Map, Set, WeakSet, WeakMap
+
+#### `WeakMap` vs `Map`, `Set` vs `WeakSet`
+
+```js
+const m = new Map();
+m.set("key", "value");
+const m2 = new WeakMap();
+m2.set({}, "value");
+m2.set("key", "value"); // Uncaught TypeError: Invalid value used as weak map key
+```
+
+#### Map
+
+>The Map object holds key-value pairs and remembers the original insertion order of the keys. Any value (both objects and primitive values) may be used as either a key or a value.
+
+[Global objects - Map - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+
+```
+new Map() – creates the map.
+map.set(key, value) – stores the value by the key.
+map.get(key) – returns the value by the key, undefined if key doesn’t exist in map.
+map.has(key) – returns true if the key exists, false otherwise.
+map.delete(key) – removes the value by the key.
+map.clear() – removes everything from the map.
+map.size – returns the current element count.
+```
+
+#### Set
+
+>The Set object lets you store **unique** values of any type, whether primitive values or object references.
+
+[Using the Set Object - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#using_the_set_object)
+
+```
+const s = new Set([1, 2, 3]);
+s // Set(3) { 1, 2, 3 }
+s.add(4) // Set(4) { 1, 2, 3, 4 }
+s.add(1) // Set(4) { 1, 2, 3, 4 }
+s.has(1) // true
+s.delete(4) // true
+s // Set(3) { 1, 2, 3 }
+s.delete(4) // false
+```
+
+
+
+
+### Statement Completion Values
+
+```js
+> const a = 3;
+undefined
+> const b = 6;
+undefined
+>a * b;
+18
+> { 5 * 2; } 10
+```
+>In node **REPL** (Read-Eval-Print-Loop)
+
+The completion value of a block is like an implicit return of the last statement value.
+
 
 
 ### Closures
@@ -264,6 +438,8 @@ Object.getOwnPropertyDescriptor(myObj,"favoriteNumber");
 // }
 
 Object.defineProperty(anotherObj,"anotherProp", { value: 42, enumerable: true });
+Object.defineProperty(myObj, "favoriteNumber", { enumerable: false });
+for (let item in myObj) { console.log(item); } // doesn't print anything, enumerable === false
 ```
 
 [You don't know JS - Kyle Simpson](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/objects-classes/ch2.md)
@@ -568,10 +744,10 @@ Some other languages allow multiple inheritance. JavaScript does not support mul
 
 #### Thenables
 
->In JavaScript, a thenable is an object that has a then() function. All promises are thenables, but not all thenables are promises.
+>In JavaScript, a thenable is an object that has a `then()` function. All promises are thenables, but not all thenables are promises.
 Many promise patterns, like chaining and async/await, work with any thenable. For example, you can use thenables in a promise chain:
 
-```
+```js
 const thenable = {
   then: function(onFulfilled) {
     setTimeout(() => onFulfilled(42), 10);
@@ -585,57 +761,32 @@ Promise.resolve().
   });
 ```
 
+#### Promise implementation
+
 [Thenables - MasteringJS](https://masteringjs.io/tutorials/fundamentals/thenable)
 
-### Enumerables
+[Promise implementation - codepen](https://codepen.io/mayank_shubham/pen/abpEVJK?editors=0011)
 
-// ...
+### Error
 
-### Map, Set, Array
+>In JavaScript, you can throw any value as an exception, not just instances of the `Error` class. However, using the Error class or its subclasses provides several advantages:
 
-#### Map
+It's advised to throw instance of `Error` or derived class errors. The advantages are :
 
->The Map object holds key-value pairs and remembers the original insertion order of the keys. Any value (both objects and primitive values) may be used as either a key or a value.
+- **Standardization**: Using `Error` or its subclasses helps follow established conventions and promotes code readability and consistency.
+- **Stack trace**: When an error occurs and is thrown as an Error object, it captures the current stack trace. (In browsers, the `Error` object provides a stack property that contains the stack trace information. You can access it using errorObject.stack.)
 
-[Global objects - Map - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+#### Custom `Error` subclasses
 
+```js
+class CustomError extends Error {
+	constructor(msg) {
+		super(msg);
+		this.name = 'CustomError';
+	}
+}
+throw new CustomError('Custom message'); // Uncaught CustomError: Custom message
 ```
-new Map() – creates the map.
-map.set(key, value) – stores the value by the key.
-map.get(key) – returns the value by the key, undefined if key doesn’t exist in map.
-map.has(key) – returns true if the key exists, false otherwise.
-map.delete(key) – removes the value by the key.
-map.clear() – removes everything from the map.
-map.size – returns the current element count.
-```
-
-#### Set
-
->The Set object lets you store **unique** values of any type, whether primitive values or object references.
-
-```
-const s = new Set([1, 2, 3]);
-s // Set(3) { 1, 2, 3 }
-s.add(4) // Set(4) { 1, 2, 3, 4 }
-s.add(1) // Set(4) { 1, 2, 3, 4 }
-s.has(1) // true
-s.delete(4) // true
-s // Set(3) { 1, 2, 3 }
-s.delete(4) // false
-```
-
-[Using the Set Object - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#using_the_set_object)
-
-
-
-### Generators
-
-// ...
-
-### Symbols
-
-// ...
-
 
 ### Mutable/Immutable
 
@@ -685,6 +836,8 @@ All the microtasks are executed during the event loop iteration.
 ### Proxy
 
 
+### DOM
+
 ### Misc
 
 #### Local variable name `undefined`
@@ -720,6 +873,59 @@ void 42; // undefined
 const nan = "hello" / 5;
 Object.is(nan, NaN); // true
 Object.is(0 * 5, -0); // false
+```
+#### Labels
+
+```js
+var counter = 0;
+label: 	while (true) {
+	console.log('first while');
+		if (counter)
+			break ;
+		counter++;
+		while (true) {
+			continue label;
+		}
+	}
+
+```
+
+A label can apply to a nonloop block, but only break can reference such a nonloop label.
+
+```js
+label: { break label; console.log('never run!') }
+```
+
+#### Temporary Dead Zone and `typeof`
+
+>Interestingly, while typeof has an exception to be safe for unde‐ clared variables, no such safety exception is made for TDZ references
+>
+{
+	typeof a; // undefined
+	typeof b; // Uncaught ReferenceError: Cannot access 'uuu' before initialization (TDZ)1=
+	let b;
+}
+
+#### `try`...`finally`
+
+```js
+function foo() {
+	try {
+		return 42;
+	} finally {
+		console.log('Hello');
+	}
+	console.log(foo());
+	// Hello
+	// 42
+}
+```
+
+#### Global DOM Variables
+
+```js
+// <div id="foo></div>
+if (typeof foo === "undefined) { console.log('never runs'); }
 ```
 
 ### Mysterious questions
