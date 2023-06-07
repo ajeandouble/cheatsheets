@@ -2,6 +2,8 @@
 
 ## Resources
 
+### Documentation and courses
+
 [Javascript Tutorial](https://javascript.info/)
 
 [You don't know JS](https://github.com/getify/You-Dont-Know-JS)
@@ -14,10 +16,13 @@
 
 [Javascript testing best practices](https://github.com/goldbergyoni/javascript-testing-best-practices)
 
+### Practice
+
 [Top 10 tricky javascript questions - medium](https://andreassujono.medium.com/top-10-tricky-javascript-questions-often-asked-by-interviewers-45c7dd90495e)
 
 [Hello Javascript (JS interview questions)](https://www.hellojavascript.info/)
 
+[nodeschool.io](https://nodeschool.io/)
 
 ## Language Essentials
 
@@ -928,10 +933,141 @@ function foo() {
 if (typeof foo === "undefined) { console.log('never runs'); }
 ```
 
+#### `arguments` object
+
+The arguments object has some array-like characteristics but lacks many array methods and properties. It is not an instance of `Array` and thus doesn't inherit its methods. It also is immutable
+
+
+## Functional Programming
+
+[Functional Programming in JS - Medium](https://dev.to/mpodlasin/functional-programming-in-js-part-i-composition-currying-lodash-and-ramda-1ohb)
+
+### Concepts
+
+#### Pure functions
+
+```js
+function pure (x){
+  return x + 2
+}
+
+var a;
+function impure(x) {
+	a = x + 2;
+}
+```
+
+#### Immutability
+
+Functional programming promotes the use of immutable data, where data structures cannot be modified after they are created. Instead of modifying data, functional programs create new data structures that reflect the desired changes. Immutability helps with reasoning about code, preventing unexpected mutations, and enabling efficient concurrency.
+
+#### First-Class and High-Order functions
+
+```js
+const multiply = (a, b) => a * b;
+
+function applyOperation(a, b, operation) {
+  return operation(a, b);
+}
+
+const result = applyOperation(3, 4, multiply);
+```
+
+#### Function composition
+
+```js
+function addOne(num) {
+  return num + 1;
+}
+
+function double(num) {
+  return num * 2;
+}
+
+const composedFunction = (num) => double(addOne(num));
+
+const result = composedFunction(5);
+```
+
+
+
+## DOM and Browser
+
+### Walking the DOM
+
+- `<html>` → `document.documentElement`
+- `<head>` → `document.head`
+- `<body>` → `doucment.body`
+
+- **Children nodes** → `.childNodes`, `firstChild` and `lastChild`
+- **Parent node** → `.parentNode` and `parentElement`
+- **Sibling nodes** → `nextSibling` and `previousSibling` 
+
+```js
+console.log( document.documentElement.parentNode ); // document
+console.log( document.documentElement.parentElement ); // null
+```
+
+
+### Searching and modifying element and their attributes
+
+#### Searching
+
+- `document.getElementById(id)`. There is also a global variable `id` automatically created (it is bad practice to access an element this way)
+- `elem.querySelectorAll(css)` returns all elements inside elem matching the given CSS selector
+- `elem.querySelector(css)` returns the same result as `elem.querySelectorAll(css)[0]`.
+- `elem.matches(css)` checks if the element match the selector
+- `elem.getElementsByTagName(tag)`, `elem.getElementsByClassName(className)`, `document.getElementsByName(name)`
+
+>All methods `getElementsBy*` return a live collection. Such collections always reflect the current state of the document and “auto-update” when it changes.
+>In contrast, `querySelectorAll` returns a static collection. It’s like a fixed array of elements.
+
+[Searching elements - javascript.info](https://javascript.info/searching-elements-dom#live-collections)
+
+#### Modifying the document
+
+`document.createElement(tag)`, `elem.cloneNode(deep)`, `node.append(...nodes or strings)` etc.
+
+#### Attributes
+
+- `elem.hasAttribute(name)` → to check for existence.
+- `elem.getAttribute(name)`
+- `elem.setAttribute(name, value)`
+- `elem.removeAttribute(name)`
+- `elem.attributes` → a collection of all attributes.
+
+
+### DOM events
+
+- **HTML attribute:** `onclick="..."`
+- **DOM property:** `elem.onclick = function(...)`
+- **Methods:** `elem.addEventListener(event, handler[, phase])`, `removeEventListener`
+
+### Other
+
+>The DOMContentLoaded event triggers on document when the DOM is ready. We can apply JavaScript to elements at this stage.
+
+
+## Misc
+
+
+### Websockets
+
+>WebSockets don’t have cross-origin limitations. They are well-supported in browsers. They can send/receive strings and binary data.
+
+### `async` and `defer` `<script>` attributes
+
+>The `defer` attribute tells the browser not to wait for the script. Instead, the browser will continue to process the HTML, build DOM. The script loads “in the background”, and then runs when the DOM is fully built.
+
+>The async attribute is somewhat like defer. It also makes the script non-blocking. But it has important differences in the behavior.
+
+The async attribute means that a script is completely independent:
+
+[script async defer -  javascript.info](https://javascript.info/script-async-defer)
+
 ### Mysterious questions
 
-- Since js doesn't implement operator overloading. Can the subscripting operator `[]` be seen has syntaxic sugar for `charAt`?
-
+Are array-like objects just iterables?
 ```js
 const foo = {n:1}
 foo = {n:2};
