@@ -23,6 +23,17 @@ pointer to its location in memory. a is a name that refers to this specific loca
 
 [Python Essential Reference - David Beazley](https://theswissbay.ch/pdf/Gentoomen%20Library/Programming/Python/Python%20Essential%20Reference%2C%20Fourth%20Edition%20%282009%29.pdf)
 
+### Types list
+
+- Numeric data types: `int`, `float`, `complex`
+- String data types: `str`
+- Sequence types: `list`, `tuple`, `range`
+- Binary types: `bytes`, `bytearray`, `memoryview`
+- Mapping data type: `dict`
+- Boolean type: `bool`
+- Set data types: `set`, `frozenset`
+
+
 ### Identity and Type
 
 >The built-in function `id()` returns the identity of an object as an integer.This integer
