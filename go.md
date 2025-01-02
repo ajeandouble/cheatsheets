@@ -171,7 +171,6 @@ func main() {
 
 **Concurrent** execution can lead to race conditions. Even on a granular CPU instruction scale.
 
-
 #### Interfaces
 
 [Interfaces - Russ Cox](https://research.swtch.com/interfaces)

@@ -6,6 +6,11 @@
 
 [cpython source code - realpython.com](https://realpython.com/cpython-source-code-guide/)
 
+[cpython internals book (sample version) - Anthony Shaw](https://static.realpython.com/cpython-internals-sample-chapters.pdf)
+
+[byteplay - wiki python](https://wiki.python.org/moin/ByteplayDoc)
+
+[Dive Into Python - DIE](https://linux.die.net/)
 
 ## Type and Objects
 
@@ -23,15 +28,24 @@ pointer to its location in memory. a is a name that refers to this specific loca
 
 [Python Essential Reference - David Beazley](https://theswissbay.ch/pdf/Gentoomen%20Library/Programming/Python/Python%20Essential%20Reference%2C%20Fourth%20Edition%20%282009%29.pdf)
 
-### Types list
+### Built-in types
 
-- Numeric data types: `int`, `float`, `complex`
-- String data types: `str`
-- Sequence types: `list`, `tuple`, `range`
-- Binary types: `bytes`, `bytearray`, `memoryview`
-- Mapping data type: `dict`
-- Boolean type: `bool`
-- Set data types: `set`, `frozenset`
+|   Category   |     Name     |
+|--------------|--------------|
+| None         | `type(None)` |
+| Numbers      | `int `       |
+|              | `long`       |
+|              | `float`      |
+|              | `complex`    |
+|              | `bool`       |
+| Sequences    | `str`        |
+|              | `unicode`    |
+|              | `list`       |
+|              | `tuple`      |
+|              | `xrange`     |
+| Mapping      | `dict`       |
+| Sets         | `set`        |
+|              | `frozenset`  |
 
 
 ### Identity and Type
@@ -98,25 +112,6 @@ False
 The enforcement of mutability and immutability is **built into the behavior of each object type,** and it **can not be modified or overridden** at runtime. It is a fundamental characteristic of the object type itself. It is described in the Python specifications.
 
 When you perform operations on these objects, Python handles the details of accessing the object's value and performing the necessary computations. You don't directly access the memory addresses or low-level details of the objects in most cases. When you attempt to modify an object, **Python checks the type of the object** and determines whether it is mutable or immutable.
-
-### Built-in types
-
-|   Category   |     Name     |
-|--------------|--------------|
-| None         | `type(None)` |
-| Numbers      | `int `       |
-|              | `long`       |
-|              | `float`      |
-|              | `complex`    |
-|              | `bool`       |
-| Sequences    | `str`        |
-|              | `unicode`    |
-|              | `list`       |
-|              | `tuple`      |
-|              | `xrange`     |
-| Mapping      | `dict`       |
-| Sets         | `set`        |
-|              | `frozenset`  |
 
 #### User-defined functions
 
@@ -388,6 +383,9 @@ class Foo(object):
 	pass
 Foo.__cls_id__
 ```
+
+## CPython Implementation
+
 
 ## Misc
 
