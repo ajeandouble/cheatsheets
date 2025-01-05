@@ -1,16 +1,24 @@
 # Memory
 
-## Resources
-
-[Memory allocation strategies - Ginger Bill's blog](https://www.gingerbill.org/article/2019/02/01/memory-allocation-strategies-001/)
-
 ## Pages
 
-***...TODO***
+**_...TODO_**
 
 ## Fixed page allocator
 
 ### Bump allocator
 
 ```
-Alocate a page
+- Allocate a page
+- Keep a pointer to the top of used memory
+- Bump it at each bump alloc call
+```
+
+Sucks because you can't free parts of the memory.
+Although you could wipe out the memory and reset the whole data when it's invalidated.
+**Saves time from syscall**!
+
+### Arena Allocator
+
+It's a **_bump allocator with expandable memory_**!
+The operating system provides a mechanism? With pages that it allocates and an interface. It wil lfree everything for once and for all (all the pages).
