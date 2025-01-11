@@ -414,6 +414,7 @@ end
 > - Don’t Chain Method Calls.
 > - Avoid Global Data (You’ll find yourself writing a bunch of setup code to create a global environment just to allow your test to run.)
 > - If It’s Important Enough to Be Global, Wrap It in an API
+> - (...) stop what you’re doing. (...) Stop thinking about the code, and do something that is fairly mindless for a while, away from a keyboard.
 
 ## Configuration
 
@@ -465,5 +466,99 @@ end
 > A semaphore is simply a thing that only one person can own at a time. You can create a semaphore and then use it to control access to some other resource. 
 
 
+## Don't program by coincidence
 
-# The myth of the man month
+### Program delibetaretly
+
+> - Always be aware of what you are doing
+> - Can you explain the code, in detail, to a more junior programmer? If not, perhaps you are relying on coincidences.
+> - Don’t code in the dark. Build an application you don’t fully grasp, or use a technology you don’t understand.
+> - ***If you’re not sure why it works, you won’t know why it fails.***
+> - ***Proceed from a plan.***
+> - ***If you can’t tell if something is reliable, assume the worst.***
+> - Document your assumptions.
+> - Don’t just test your code, but test your assumptions as well. Don’t guess; actually try it.
+> - Prioritize your effort. Spend time on the important aspects; more than likely, these are the hard parts.
+> - Don’t let existing code dictate future code. All code can be replaced if it is no longer appropriate.
+
+> So next time something seems to work, but you don’t know why, make sure it isn’t just a coincidence.
+
+## Refactor Early, refactor Often
+
+> - Don’t try to refactor and add functionality at the same time.
+> - Make sure you have good tests before you begin refactoring. Run the tests as often as possible. That way you will know quickly if your changes have broken anything.
+> - Take short, deliberate steps (...) If you keep your steps small, and test after each step, you will avoid prolonged debugging.
+
+
+## Testing
+
+> ***A Test is the First User of your Code***
+
+> Test Your Software, or Your Users Will
+
+> Design to Test.
+
+### TDD cycles
+
+> 1. Decide on a small piece of functionality you want to add.
+> 2. Write a test that will pass once that functionality is implemented.
+> 3. Run all tests. Verify that the only failure is the one you just wrote.
+> 4. Write the smallest amount of code needed to get the test to pass, and verify that the tests now run cleanly.
+> 5. Refactor your code: see if there is a way to improve on what you just wrote (the test or the function). Make sure the tests still pass when you’re done.
+
+### Slaves to Test Driven Design
+
+> - (Don't) spend inordinate amounts of time ensuring that they always have 100% test coverage.
+> - (Don't do) redundant tests.
+
+### Botom Up vs Top-Down
+
+> Neither school actually works, because both ignore one of the most important aspects of software development: we don’t know what we’re doing when we start. The top-down folks  assume they can express the whole requirement up front: they can’t. The bottomup folks assume they can build a list of abstractions which will take them eventually to a single  top-level solution, but how can they decide on the functionality of layers when they don’t know where they are heading?
+
+> By all means practice TDD. But, if you do, don’t forget to stop every now and then and look at the big picture. It is easy to become seduced by the green "tests passed" message, writing lots of code that doesn’t actually get you closer to a solution.
+
+#### Build End-to-End, Not Top-Down nor Bottom-Up
+
+> We strongly believe that the only way to build software is incrementally. Build small pieces of end-to-end functionality, learning about the problem as you go. Apply this learning as you continue to flesh out the code, involve the customer at each step, and have them guide the process.
+
+### You need to know where you are going
+
+> However, this approach can mislead you, encouraging you to focus on and endlessly polish the easy problems while ignoring the real reason you’re coding.
+
+> Tests can definitely help drive development. But, as with every drive, unless you have a destination in mind, you can end up going in circles.
+
+#### The cost of early rigidity
+
+A More Pragmatic Approach to dumb TDD.
+
+- Focus on critical path integration tests first
+- Keep the code simple and malleable
+- Avoid complex abstractions until patterns emerge
+- Plan for refactoring when requirements stabilize
+
+Over-tested, complex code early in a project can create:
+
+- Fear of changes
+- Analysis paralysis
+- Maintenance burden
+- False sense of security
+
+### Unit testing
+
+> We like to think of unit testing as testing against contract.
+
+So, you can't have proper unit tests if you don't have proper contract.
+
+
+# Domain Driven Design - Eric Evans
+
+## TODO ...
+
+
+# The Mythical Man-Month - 
+
+> The tendency for managers to repeat such errors in project development led Brooks to quip that his book is called "The Bible of Software Engineering", because "everybody quotes it, some people read it, and a few people go by it".
+
+[The Mythical Man Month @ Wikipedia](https://en.wikipedia.org/wiki/The_Mythical_Man-Month)
+
+## TODO ...
