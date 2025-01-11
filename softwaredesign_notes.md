@@ -550,6 +550,41 @@ Over-tested, complex code early in a project can create:
 So, you can't have proper unit tests if you don't have proper contract.
 
 
+## Security
+
+> Security through obscurity simply doesn't work.
+
+### Minimize attack surface area
+
+> Code complexity makes the attack surface larger, with more opportunities for unanticipated side effects.
+
+> Input data is an attack vector.
+
+> Unauthenticated services are an attack vector.
+
+> Authenticated services are an attack vector: Keep the number of authorized users at an absolute minimum. Cull unused, old, or outdated users and services.
+
+> Output data is an attack vector: Don't give away information.
+
+> Debugging info is an attack vector.
+
+### Principle of Least Privilege
+
+> Another key principle is to use the least amount of privilege for the shortest time you can get away with. 
+
+### Encrypt Sensitive Data
+
+> Keys and secrets need to be managed separately, generally via config files or environment variables as part of build and deployment.
+
+### Maintain Security Updates
+
+> Apply Security Patches Quickly.
+
+
+## Naming
+
+
+
 # Domain Driven Design - Eric Evans
 
 ## TODO ...
