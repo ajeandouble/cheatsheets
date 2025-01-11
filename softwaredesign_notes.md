@@ -7,7 +7,8 @@
 - Changing one thing doesn't unexpectedly affect another
 - Components have clear, non-overlapping responsibilities
 
-# Software Design
+
+# A Philosophy of Software Design - John Ousterhout
 
 > The reward for being a good designer is that you get to spend a larger fraction of your time in the design phase, which is fun. Poor designers spend most of their time chasing bugs in complicated and brittle code. If you improve your design skills, not only will you produce higher quality software more quickly, but the software development process will be more enjoyable.
 
@@ -246,5 +247,223 @@ Use comments as placeholders when programming (body of functions, function calls
 > Premature optimization is mother of all evil
 
 [Someone @somewhere](https://google.com)
+
+
+# The Pragmatic Programmer - D. Thomas & A. Hunt
+
+## Software Entropy
+
+### Don't live with broken windows
+
+> . Ignoring a clearly broken
+situation reinforces the ideas that perhaps nothing can be fixed, that no one cares, all is doomed; all negative thoughts which can spread among team members, creating a vicious spiral.
+
+
+## Good-enough software
+
+> Great software today is often preferable to the fantasy of perfect software tomorrow. If you give your users something to play with early, their feedback will often lead you to a better eventual solution.
+
+
+## Invest regularly in your knowledge portfolio
+
+> The more technologies you are comfortable with, the better you will be able to adjust to change. And don’t forget all the other skills you need, including those in nontechnical areas.
+
+
+## Good design is easier to change than Bad design
+
+> A thing is well designed if it adapts to the people who use it. For code, that means it must adapt by changing. So we believe in the ETC principle: ***Easier to Change***. ETC. 
+
+
+## Design Principle - Orthogonality
+
+> ***Eliminates Effects between unrelated things.***
+
+***Orthogonality*** promotes predictability and code modules re-use. They can be assembled in a new predictible and easy to understand fashion.
+
+### Benefits
+
+#### Productivity gain
+
+> Changes are localized, so development time and testing time are reduced. It is easier to write relatively small, self-contained components than a single large block of code. Simple components can be designed, coded, tested, and then forgotten—there is no need to keep changing existing code as you add new code.
+
+> An orthogonal approach also promotes reuse. If components have specific, well-defined responsibilities, they can be combined with new components in ways that were not envisioned by their original implementors. 
+
+> You get more functionality per unit effort by combining orthogonal components.
+
+#### Risk Reduction
+
+> Diseased sections of code are isolated. If a module is sick, it is less likely to spread the symptoms around the rest of the system. It is also easier to slice it out and transplant in something new and healthy.
+
+> The resulting system is less fragile. Make small changes and fixes to a particular area, and any problems you generate will be restricted to that area.
+
+> An orthogonal system will probably be better tested, because it will be easier to design and run tests on its components.
+
+> You will not be as tightly tied to a particular vendor, product, or platform, because the interfaces to these third-party components will be isolated to smaller parts of the overall development.
+
+
+## Design Principle - Reversibility
+
+> Nothing is more dangerous than an idea if it’s the only one you have.
+
+Alain - French motherfucker philosopher
+
+> There are no final decisions (understand that the code is not cast in stone)
+
+
+### Architectural Flexibility
+
+>>> Good architecture doesn't just solve today's problem - it anticipates the possibility that today's perfect solution might be tomorrow's bottleneck. This means:
+>>> - Creating proper abstractions around third-party services
+>>> - Avoiding tight coupling with specific implementations
+>>> - Treating major components as "pluggable" services
+
+
+## Design Principle - Tracer Bullets
+
+> Look for the important requirements, the ones that define the system. Look for the areas where you have doubts, and where you see the biggest risks. Then prioritize your development so that these are the first areas you code.
+
+> Tracer development is consistent with the idea that a project is never finished: there will always be changes required and functions to add. It is an incremental approach.
+
+> In a tracer code development, developers tackle use cases one by one. When one is done, they move to the next. It is far easier to measure performance and to demonstrate progress to your user. Because each individual development is smaller, you avoid creating those monolithic blocks of code that are reported as 95% complete week after week.
+
+### Tracer coding vs Prototyping
+
+> The tracer code approach addresses a different problem. You need to know how the application as a whole hangs together. You want to show your users how the interactions will work in practice, and you want to give your developers an architectural skeleton on which to hang code.
+
+
+## Design Principle - Prototyping
+
+> Prototypes are designed to answer just a few questions, so they are much cheaper and faster to develop than applications that go into production. The code can ignore unimportant details (unimportant to you at the moment, but probably very important to the user later on).
+
+### Things to prototype
+
+- Architecture
+- New functionality in an existing system
+- Structure of contents of external data
+- Third-party tools or components
+- Performance issues
+- User interface design
+
+
+### Architecture prototyping
+
+- Are the responsibilities of the major areas well defined and appropriate?
+- Are the collaborations between major components well defined?
+- Is coupling minimized?
+- Can you identify potential sources of duplication?
+- Are interface definitions and constraints acceptable?
+- Does every module have an access path to the data it needs during execution? Does it have that access when it needs it?
+
+### Goal of prototyping
+
+> It’s easy to become misled by the apparent completeness of a demonstrated prototype, and project sponsors or management may insist on deploying the prototype (or its progeny) if ***you don’t set the right expectations.***
+
+
+## Design Principle - Estimating
+
+### Iterate the Schedule with the Code
+
+> So you complete the coding and testing of the initial functionality and mark this as the end of the first iteration. Based on that experience, you can refine your initial guess on the number of iterations and what can be included in each. The refinement gets better and better each time, and confidence in the schedule grows along with it. This kind of estimating is often done during the team’s review at the end of each iterative cycle.
+
+> This may not be popular with management, who typically want a single, hard-and-fast number before the project even starts. You’ll have to help them understand that the team, their productivity, and the environment will determine the schedule.
+
+
+## Fix the Problem, not the Blame
+
+> It doesn’t really matter whether the bug is your fault or someone else’s. ***It is still your problem.***
+
+> Read the Damn Error Message.
+
+
+## Pragmatic Paranoia
+
+> You Can’t Write Perfect Software.
+
+
+### Design by Contract
+
+> It is a simple yet powerful technique that focuses on documenting (and agreeing to) the rights and responsibilities of software modules to ensure program correctness.
+
+> Here, the emphasis is on “lazy” code: be strict in what you will accept before you begin, and promise as little as possible in return. Remember, if your contract indicates that you’ll accept anything and promise the world in return, then you’ve got a lot of code to write!
+
+> Simply enumerating what the input domain range is, what the boundary conditions are, and what the routine promises to deliver—or, more importantly, what it doesn’t promise to deliver—before you write the code is a huge leap forward in writing better software.
+
+
+## Resources balancing
+
+### Finish what you Start
+
+> Most of the time, resource usage follows a predictable pattern: you allocate the resource, use it, and then deallocate it.
+
+>>> Deallocate resources in the opposite order to that in which you allocate them. That way you won’t orphan resources if one resource contains references to another.
+>>> When allocating the same set of resources in different places in your code, always allocate them in the same order. This will reduce the possibility of deadlock. (If process A claims resource1 and is about to claim resource2, while process B has claimed resource2 and is trying to get resource1, the two processes will wait forever.)
+
+>>> If you are programming in an object-oriented language, you may find it useful to encapsulate resources in classes. Each time you need a particular resource type, you nstantiate an object of that class. When the object goes out of scope, or is reclaimed by the garbage collector, the object’s destructor then deallocates the wrapped resource.
+
+```
+thing = allocate_resource()
+begin
+	process(thing)
+finally
+	deallocate(thing)
+end
+```
+
+## Tips
+
+> - Don’t Chain Method Calls.
+> - Avoid Global Data (You’ll find yourself writing a bunch of setup code to create a global environment just to allow your test to run.)
+> - If It’s Important Enough to Be Global, Wrap It in an API
+
+## Configuration
+
+> Parameterize Your App Using External Configuration (...) When code relies on values that may change after the application has gone live, keep those values external to the app. When your application will run in different environments, and potentially for different customers, keep the environment- and customerspecific values outside the app.
+
+> We still want configuration data kept external to the application, but rather than in a flat file or database, we’d like to see it stored behind a service API.
+
+## Patterns
+
+### Finite State Machines
+
+> It consists of a set of states, one of which is the current state. For each state, we list the events that are significant to that state. For each of those events, we define the new current state of the system.
+
+> State machines are underused by developers, and we’d like to encourage you to look for opportunities to apply them.
+
+### The Observer Pattern
+
+> In the observer pattern we have a source of events, called the observable and a list of clients, the observers, who are interested in those events.
+
+> But the observer pattern has a problem: because each of the observers has to register with the observable, it introduces coupling. In addition, because in the typical implementation the callbacks are handled inline by the observable, synchronously, it can introduce performance bottlenecks.
+
+### Publish/Subscribe
+
+> Publish/Subscribe (pubsub) generalizes the observer pattern, at the same time solving the problems of coupling and performance.
+
+> In the pubsub model, we have publishers and subscribers. These are connected via channels. The channels are implemented in a separate body of code.
+
+> Compared to the observer pattern, pubsub is a great example of reducing coupling by abstracting up through a shared interface (the channel). 
+
+### Reactive Programming and Streams
+
+> The current de facto baseline for reactive event handling is defined on the site http://reactivex.io, which defines a language-agnostic set of principles and documents some common implementations.
+
+
+## Breaking Temporal Coupling / Concurrency and Parallelism
+
+> Method A must always be called before method B; only one report can be run at a time; you must wait for the screen to redraw before the button click is received. Tick must happen before tock.
+
+> We need to allow for concurrency and to think about decoupling any time or order dependencies. In doing so, we can gain flexibility and reduce any time-based dependencies in many areas of development: workflow analysis, architecture, design, and deployment.
+
+> Analyze Workflow to Improve Concurrency (...) Activity diagrams show the potential areas of concurrency.
+
+***See*** [Concurrency in UML 2.6](https://www.omg.org/certification/uml/documents/concurrency_in_uml_version_2.6.pdf)
+
+> Random Failures Are Often Concurrency Issues.
+
+### Semaphores
+
+> A semaphore is simply a thing that only one person can own at a time. You can create a semaphore and then use it to control access to some other resource. 
+
+
 
 # The myth of the man month
