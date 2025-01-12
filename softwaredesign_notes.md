@@ -7,7 +7,6 @@
 - Changing one thing doesn't unexpectedly affect another
 - Components have clear, non-overlapping responsibilities
 
-
 # A Philosophy of Software Design - John Ousterhout
 
 > The reward for being a good designer is that you get to spend a larger fraction of your time in the design phase, which is fun. Poor designers spend most of their time chasing bugs in complicated and brittle code. If you improve your design skills, not only will you produce higher quality software more quickly, but the software development process will be more enjoyable.
@@ -248,7 +247,6 @@ Use comments as placeholders when programming (body of functions, function calls
 
 [Someone @somewhere](https://google.com)
 
-
 # The Pragmatic Programmer - D. Thomas & A. Hunt
 
 ## Software Entropy
@@ -257,31 +255,27 @@ Use comments as placeholders when programming (body of functions, function calls
 
 > Ignoring a clearly broken situation reinforces the ideas that perhaps nothing can be fixed, that no one cares, all is doomed; all negative thoughts which can spread among team members, creating a vicious spiral.
 
-
 ## Good-enough software
 
 > Great software today is often preferable to the fantasy of perfect software tomorrow. If you give your users something to play with early, their feedback will often lead you to a better eventual solution.
-
 
 ## Invest regularly in your knowledge portfolio
 
 > The more technologies you are comfortable with, the better you will be able to adjust to change. And don’t forget all the other skills you need, including those in nontechnical areas.
 
-
 ## Good design is easier to change than Bad design
 
-> A thing is well designed if it adapts to the people who use it. For code, that means it must adapt by changing. So we believe in the ETC principle: ***Easier to Change***. ETC. 
-
+> A thing is well designed if it adapts to the people who use it. For code, that means it must adapt by changing. So we believe in the ETC principle: **_Easier to Change_**. ETC.
 
 ## The essence of Good design
 
-> ***The measure of good design is how easy the result of that design is to change***: a good design produces something that’s easier to change than a bad design.
+> **_The measure of good design is how easy the result of that design is to change_**: a good design produces something that’s easier to change than a bad design.
 
 ## Design Principle - Orthogonality
 
-> ***Eliminates Effects between unrelated things.***
+> **_Eliminates Effects between unrelated things._**
 
-***Orthogonality*** promotes predictability and code modules re-use. They can be assembled in a new predictible and easy to understand fashion.
+**_Orthogonality_** promotes predictability and code modules re-use. They can be assembled in a new predictible and easy to understand fashion.
 
 ### Benefits
 
@@ -289,7 +283,7 @@ Use comments as placeholders when programming (body of functions, function calls
 
 > Changes are localized, so development time and testing time are reduced. It is easier to write relatively small, self-contained components than a single large block of code. Simple components can be designed, coded, tested, and then forgotten—there is no need to keep changing existing code as you add new code.
 
-> An orthogonal approach also promotes reuse. If components have specific, well-defined responsibilities, they can be combined with new components in ways that were not envisioned by their original implementors. 
+> An orthogonal approach also promotes reuse. If components have specific, well-defined responsibilities, they can be combined with new components in ways that were not envisioned by their original implementors.
 
 > You get more functionality per unit effort by combining orthogonal components.
 
@@ -303,7 +297,6 @@ Use comments as placeholders when programming (body of functions, function calls
 
 > You will not be as tightly tied to a particular vendor, product, or platform, because the interfaces to these third-party components will be isolated to smaller parts of the overall development.
 
-
 ## Design Principle - Reversibility
 
 > Nothing is more dangerous than an idea if it’s the only one you have.
@@ -312,14 +305,13 @@ Alain - French motherfucker philosopher
 
 > There are no final decisions (understand that the code is not cast in stone)
 
-
 ### Architectural Flexibility
 
 > Good architecture doesn't just solve today's problem - it anticipates the possibility that today's perfect solution might be tomorrow's bottleneck. This means:
+>
 > - Creating proper abstractions around third-party services
 > - Avoiding tight coupling with specific implementations
 > - Treating major components as "pluggable" services
-
 
 ## Design Principle - Tracer Bullets
 
@@ -332,7 +324,6 @@ Alain - French motherfucker philosopher
 ### Tracer coding vs Prototyping
 
 > The tracer code approach addresses a different problem. You need to know how the application as a whole hangs together. You want to show your users how the interactions will work in practice, and you want to give your developers an architectural skeleton on which to hang code.
-
 
 ## Design Principle - Prototyping
 
@@ -347,7 +338,6 @@ Alain - French motherfucker philosopher
 - Performance issues
 - User interface design
 
-
 ### Architecture prototyping
 
 - Are the responsibilities of the major areas well defined and appropriate?
@@ -359,8 +349,7 @@ Alain - French motherfucker philosopher
 
 ### Goal of prototyping
 
-> It’s easy to become misled by the apparent completeness of a demonstrated prototype, and project sponsors or management may insist on deploying the prototype (or its progeny) if ***you don’t set the right expectations.***
-
+> It’s easy to become misled by the apparent completeness of a demonstrated prototype, and project sponsors or management may insist on deploying the prototype (or its progeny) if **_you don’t set the right expectations._**
 
 ## Design Principle - Estimating
 
@@ -370,18 +359,15 @@ Alain - French motherfucker philosopher
 
 > This may not be popular with management, who typically want a single, hard-and-fast number before the project even starts. You’ll have to help them understand that the team, their productivity, and the environment will determine the schedule.
 
-
 ## Fix the Problem, not the Blame
 
-> It doesn’t really matter whether the bug is your fault or someone else’s. ***It is still your problem.***
+> It doesn’t really matter whether the bug is your fault or someone else’s. **_It is still your problem._**
 
 > Read the Damn Error Message.
-
 
 ## Pragmatic Paranoia
 
 > You Can’t Write Perfect Software.
-
 
 ### Design by Contract
 
@@ -390,7 +376,6 @@ Alain - French motherfucker philosopher
 > Here, the emphasis is on “lazy” code: be strict in what you will accept before you begin, and promise as little as possible in return. Remember, if your contract indicates that you’ll accept anything and promise the world in return, then you’ve got a lot of code to write!
 
 > Simply enumerating what the input domain range is, what the boundary conditions are, and what the routine promises to deliver—or, more importantly, what it doesn’t promise to deliver—before you write the code is a huge leap forward in writing better software.
-
 
 ## Resources balancing
 
@@ -445,12 +430,11 @@ end
 
 > In the pubsub model, we have publishers and subscribers. These are connected via channels. The channels are implemented in a separate body of code.
 
-> Compared to the observer pattern, pubsub is a great example of reducing coupling by abstracting up through a shared interface (the channel). 
+> Compared to the observer pattern, pubsub is a great example of reducing coupling by abstracting up through a shared interface (the channel).
 
 ### Reactive Programming and Streams
 
 > The current de facto baseline for reactive event handling is defined on the site http://reactivex.io, which defines a language-agnostic set of principles and documents some common implementations.
-
 
 ## Breaking Temporal Coupling / Concurrency and Parallelism
 
@@ -460,14 +444,13 @@ end
 
 > Analyze Workflow to Improve Concurrency (...) Activity diagrams show the potential areas of concurrency.
 
-***See*** [Concurrency in UML 2.6](https://www.omg.org/certification/uml/documents/concurrency_in_uml_version_2.6.pdf)
+**_See_** [Concurrency in UML 2.6](https://www.omg.org/certification/uml/documents/concurrency_in_uml_version_2.6.pdf)
 
 > Random Failures Are Often Concurrency Issues.
 
 ### Semaphores
 
-> A semaphore is simply a thing that only one person can own at a time. You can create a semaphore and then use it to control access to some other resource. 
-
+> A semaphore is simply a thing that only one person can own at a time. You can create a semaphore and then use it to control access to some other resource.
 
 ## Don't program by coincidence
 
@@ -476,9 +459,9 @@ end
 > - Always be aware of what you are doing
 > - Can you explain the code, in detail, to a more junior programmer? If not, perhaps you are relying on coincidences.
 > - Don’t code in the dark. Build an application you don’t fully grasp, or use a technology you don’t understand.
-> - ***If you’re not sure why it works, you won’t know why it fails.***
-> - ***Proceed from a plan.***
-> - ***If you can’t tell if something is reliable, assume the worst.***
+> - **_If you’re not sure why it works, you won’t know why it fails._**
+> - **_Proceed from a plan._**
+> - **_If you can’t tell if something is reliable, assume the worst._**
 > - Document your assumptions.
 > - Don’t just test your code, but test your assumptions as well. Don’t guess; actually try it.
 > - Prioritize your effort. Spend time on the important aspects; more than likely, these are the hard parts.
@@ -492,10 +475,9 @@ end
 > - Make sure you have good tests before you begin refactoring. Run the tests as often as possible. That way you will know quickly if your changes have broken anything.
 > - Take short, deliberate steps (...) If you keep your steps small, and test after each step, you will avoid prolonged debugging.
 
-
 ## Testing
 
-> ***A Test is the First User of your Code***
+> **_A Test is the First User of your Code_**
 
 > Test Your Software, or Your Users Will
 
@@ -516,7 +498,7 @@ end
 
 ### Botom Up vs Top-Down
 
-> Neither school actually works, because both ignore one of the most important aspects of software development: we don’t know what we’re doing when we start. The top-down folks  assume they can express the whole requirement up front: they can’t. The bottomup folks assume they can build a list of abstractions which will take them eventually to a single  top-level solution, but how can they decide on the functionality of layers when they don’t know where they are heading?
+> Neither school actually works, because both ignore one of the most important aspects of software development: we don’t know what we’re doing when we start. The top-down folks assume they can express the whole requirement up front: they can’t. The bottomup folks assume they can build a list of abstractions which will take them eventually to a single top-level solution, but how can they decide on the functionality of layers when they don’t know where they are heading?
 
 > By all means practice TDD. But, if you do, don’t forget to stop every now and then and look at the big picture. It is easy to become seduced by the green "tests passed" message, writing lots of code that doesn’t actually get you closer to a solution.
 
@@ -552,7 +534,6 @@ Over-tested, complex code early in a project can create:
 
 So, you can't have proper unit tests if you don't have proper contract.
 
-
 ## Security
 
 > Security through obscurity simply doesn't work.
@@ -573,7 +554,7 @@ So, you can't have proper unit tests if you don't have proper contract.
 
 ### Principle of Least Privilege
 
-> Another key principle is to use the least amount of privilege for the shortest time you can get away with. 
+> Another key principle is to use the least amount of privilege for the shortest time you can get away with.
 
 ### Encrypt Sensitive Data
 
@@ -583,21 +564,19 @@ So, you can't have proper unit tests if you don't have proper contract.
 
 > Apply Security Patches Quickly.
 
-
 ## Good naming
 
 Obviously.
-
 
 ## Before the project
 
 ### The requirement pit
 
-> ***No one knows exactly what they want***.
+> **_No one knows exactly what they want_**.
 
-> ***Programmers help people understand what they want***.
+> **_Programmers help people understand what they want_**.
 
-> ***Requirements*** are learned in a ***Feedback Loop***.
+> **_Requirements_** are learned in a **_Feedback Loop_**.
 
 > Work with a User to Think Like a User
 
@@ -611,8 +590,6 @@ Implement the general case first. Use metadata to be able to change the code acc
 > Working software over comprehensive documentation
 > Customer collaboration over contract negotiation
 > Responding to change over following a plan
-
-
 
 # Domain Driven Design - Eric Evans
 
@@ -632,16 +609,15 @@ Implement the general case first. Use metadata to be able to change the code acc
 
 ## DDD building blocks
 
-> - ***Entities*** are objects with a **distinct identity** that runs through time, like a Customer or an Order. Even if all the details change, it's still the same entity because it has a unique identifier.
+> - **_Entities_** are objects with a **distinct identity** that runs through time, like a Customer or an Order. Even if all the details change, it's still the same entity because it has a unique identifier.
 
-> - ***Value Objects*** are objects that matter only because of what they are, not who they are. For example, a Money value object combines an amount and a currency. Two Money objects with the same amount and currency are **completely interchangeable**.
+> - **_Value Objects_** are objects that matter only because of what they are, not who they are. For example, a Money value object combines an amount and a currency. Two Money objects with the same amount and currency are **completely interchangeable**.
 
-> ***Aggregates*** help maintain consistency by grouping related entities and value objects. Think of an Order aggregate that includes OrderLines - you want to ensure all order lines are consistent with their parent order. The aggregate root (in this case, Order) controls access to its members.
+> - **_Aggregates_** help maintain consistency by grouping related entities and value objects. Think of an Order aggregate that includes OrderLines - you want to ensure all order lines are consistent with their parent order. The aggregate root (in this case, Order) controls access to its members.
 
-> - ***Repositories*** provide a way to store and retrieve aggregates, hiding the details of the database. They help maintain the illusion that we're working with an **in-memory collection of objects**.
+> - **_Repositories_** provide a way to store and retrieve aggregates, hiding the details of the database. They help maintain the illusion that we're working with an **in-memory collection of objects**.
 
-> - ***Domain Services*** handle operations that don't naturally belong to any single entity or value object. For example, a transfer between bank accounts might be handled by a TransferService rather than putting that logic in either account.
-
+> - **_Domain Services_** handle operations that don't naturally belong to any single entity or value object. For example, a transfer between bank accounts might be handled by a TransferService rather than putting that logic in either account.
 
 # The Mythical Man-Month - Fred Brooks
 
@@ -649,31 +625,25 @@ Implement the general case first. Use metadata to be able to change the code acc
 
 [The Mythical Man Month @ Wikipedia](https://en.wikipedia.org/wiki/The_Mythical_Man-Month)
 
-
 ## Time and people are not interchangeable resources
 
 ### Brook's law
 
 > Adding manpower to a late software project makes it later.
 
-
 ## Surgical team
 
 > The book introduces the concept of the "surgical team" approach to software development, inspired by how surgical teams operate. In this model, one highly skilled programmer (the surgeon) does the core development while being supported by various specialists. This approach recognizes that programming talent follows a power law distribution – the best programmers are not just marginally better than average ones, but orders of magnitude more productive.
-
 
 ## Conceptual integrity
 
 > Brooks also explores the concept of "conceptual integrity" in software design. He argues that the best systems are those designed by a small number of minds working in harmony. When too many people contribute to the architectural decisions, the system becomes a patchwork of different philosophies and approaches, leading to inconsistency and increased complexity.
 
-
 ## Time distribution
 
 > According to Brooks, for a well-planned project of moderate size, the time distribution should approximately follow this pattern:
+>
 > - 1/3 (~33%) for detailed design and planning
 > - 1/6 (~16%) for coding
 > - 1/4 (~25%) for component testing and early system testing
 > - 1/4 (`25%) for system testing and all system integration
-
-
-
