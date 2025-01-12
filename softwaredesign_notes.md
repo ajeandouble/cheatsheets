@@ -315,10 +315,10 @@ Alain - French motherfucker philosopher
 
 ### Architectural Flexibility
 
->>> Good architecture doesn't just solve today's problem - it anticipates the possibility that today's perfect solution might be tomorrow's bottleneck. This means:
->>> - Creating proper abstractions around third-party services
->>> - Avoiding tight coupling with specific implementations
->>> - Treating major components as "pluggable" services
+> Good architecture doesn't just solve today's problem - it anticipates the possibility that today's perfect solution might be tomorrow's bottleneck. This means:
+> - Creating proper abstractions around third-party services
+> - Avoiding tight coupling with specific implementations
+> - Treating major components as "pluggable" services
 
 
 ## Design Principle - Tracer Bullets
@@ -398,10 +398,10 @@ Alain - French motherfucker philosopher
 
 > Most of the time, resource usage follows a predictable pattern: you allocate the resource, use it, and then deallocate it.
 
->>> Deallocate resources in the opposite order to that in which you allocate them. That way you won’t orphan resources if one resource contains references to another.
->>> When allocating the same set of resources in different places in your code, always allocate them in the same order. This will reduce the possibility of deadlock. (If process A claims resource1 and is about to claim resource2, while process B has claimed resource2 and is trying to get resource1, the two processes will wait forever.)
+> Deallocate resources in the opposite order to that in which you allocate them. That way you won’t orphan resources if one resource contains references to another.
+> When allocating the same set of resources in different places in your code, always allocate them in the same order. This will reduce the possibility of deadlock. (If process A claims resource1 and is about to claim resource2, while process B has claimed resource2 and is trying to get resource1, the two processes will wait forever.)
 
->>> If you are programming in an object-oriented language, you may find it useful to encapsulate resources in classes. Each time you need a particular resource type, you nstantiate an object of that class. When the object goes out of scope, or is reclaimed by the garbage collector, the object’s destructor then deallocates the wrapped resource.
+> If you are programming in an object-oriented language, you may find it useful to encapsulate resources in classes. Each time you need a particular resource type, you nstantiate an object of that class. When the object goes out of scope, or is reclaimed by the garbage collector, the object’s destructor then deallocates the wrapped resource.
 
 ```
 thing = allocate_resource()
@@ -607,10 +607,10 @@ Implement the general case first. Use metadata to be able to change the code acc
 
 ## Agile
 
->>> Individuals and interactions over processes and tools
->>> Working software over comprehensive documentation
->>> Customer collaboration over contract negotiation
->>> Responding to change over following a plan
+> Individuals and interactions over processes and tools
+> Working software over comprehensive documentation
+> Customer collaboration over contract negotiation
+> Responding to change over following a plan
 
 
 
