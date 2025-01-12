@@ -255,8 +255,7 @@ Use comments as placeholders when programming (body of functions, function calls
 
 ### Don't live with broken windows
 
-> . Ignoring a clearly broken
-situation reinforces the ideas that perhaps nothing can be fixed, that no one cares, all is doomed; all negative thoughts which can spread among team members, creating a vicious spiral.
+> Ignoring a clearly broken situation reinforces the ideas that perhaps nothing can be fixed, that no one cares, all is doomed; all negative thoughts which can spread among team members, creating a vicious spiral.
 
 
 ## Good-enough software
@@ -273,6 +272,10 @@ situation reinforces the ideas that perhaps nothing can be fixed, that no one ca
 
 > A thing is well designed if it adapts to the people who use it. For code, that means it must adapt by changing. So we believe in the ETC principle: ***Easier to Change***. ETC. 
 
+
+## The essence of Good design
+
+> ***The measure of good design is how easy the result of that design is to change***: a good design produces something that’s easier to change than a bad design.
 
 ## Design Principle - Orthogonality
 
@@ -581,19 +584,96 @@ So, you can't have proper unit tests if you don't have proper contract.
 > Apply Security Patches Quickly.
 
 
-## Naming
+## Good naming
+
+Obviously.
+
+
+## Before the project
+
+### The requirement pit
+
+> ***No one knows exactly what they want***.
+
+> ***Programmers help people understand what they want***.
+
+> ***Requirements*** are learned in a ***Feedback Loop***.
+
+> Work with a User to Think Like a User
+
+Implement the general case first. Use metadata to be able to change the code according to the always evolving client needs.
+
+> Use a Project Glossary. It’s hard to succeed on a project if users and developers call the same thing by different names.
+
+## Agile
+
+>>> Individuals and interactions over processes and tools
+>>> Working software over comprehensive documentation
+>>> Customer collaboration over contract negotiation
+>>> Responding to change over following a plan
 
 
 
 # Domain Driven Design - Eric Evans
 
-## TODO ...
+## Philosophy
+
+> At its core, DDD is about aligning software design with business reality.
+
+> The investment in deep domain modeling might not pay off. DDD shines in complex business domains where the main challenge is understanding and implementing complex business rules and processes.
+
+## The ubiquitous language
+
+> The Ubiquitous Language is a shared vocabulary between developers and domain experts. Instead of developers using technical terms and business people using business terms, everyone agrees on a common language. This shared understanding dramatically reduces misunderstandings and translation errors.
+
+## The domain layer
+
+> The design and implementation of business logic constitute the domain layer. In a MODEL-DRIVEN DESIGN, the software constructs of the domain layer mirror the model concepts
+
+## DDD building blocks
+
+> - ***Entities*** are objects with a **distinct identity** that runs through time, like a Customer or an Order. Even if all the details change, it's still the same entity because it has a unique identifier.
+
+> - ***Value Objects*** are objects that matter only because of what they are, not who they are. For example, a Money value object combines an amount and a currency. Two Money objects with the same amount and currency are **completely interchangeable**.
+
+> ***Aggregates*** help maintain consistency by grouping related entities and value objects. Think of an Order aggregate that includes OrderLines - you want to ensure all order lines are consistent with their parent order. The aggregate root (in this case, Order) controls access to its members.
+
+> - ***Repositories*** provide a way to store and retrieve aggregates, hiding the details of the database. They help maintain the illusion that we're working with an **in-memory collection of objects**.
+
+> - ***Domain Services*** handle operations that don't naturally belong to any single entity or value object. For example, a transfer between bank accounts might be handled by a TransferService rather than putting that logic in either account.
 
 
-# The Mythical Man-Month - 
+# The Mythical Man-Month - Fred Brooks
 
 > The tendency for managers to repeat such errors in project development led Brooks to quip that his book is called "The Bible of Software Engineering", because "everybody quotes it, some people read it, and a few people go by it".
 
 [The Mythical Man Month @ Wikipedia](https://en.wikipedia.org/wiki/The_Mythical_Man-Month)
 
-## TODO ...
+
+## Time and people are not interchangeable resources
+
+### Brook's law
+
+> Adding manpower to a late software project makes it later.
+
+
+## Surgical team
+
+> The book introduces the concept of the "surgical team" approach to software development, inspired by how surgical teams operate. In this model, one highly skilled programmer (the surgeon) does the core development while being supported by various specialists. This approach recognizes that programming talent follows a power law distribution – the best programmers are not just marginally better than average ones, but orders of magnitude more productive.
+
+
+## Conceptual integrity
+
+> Brooks also explores the concept of "conceptual integrity" in software design. He argues that the best systems are those designed by a small number of minds working in harmony. When too many people contribute to the architectural decisions, the system becomes a patchwork of different philosophies and approaches, leading to inconsistency and increased complexity.
+
+
+## Time distribution
+
+> According to Brooks, for a well-planned project of moderate size, the time distribution should approximately follow this pattern:
+> - 1/3 (~33%) for detailed design and planning
+> - 1/6 (~16%) for coding
+> - 1/4 (~25%) for component testing and early system testing
+> - 1/4 (`25%) for system testing and all system integration
+
+
+
